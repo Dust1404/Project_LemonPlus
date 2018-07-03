@@ -35,8 +35,11 @@ TaskEditWidget::TaskEditWidget(QWidget *parent) :
     editTask = 0;
     
     ui->specialJudge->setFilters(QDir::Files | QDir::Executable);
+    ui->interactorPath->setFilters(QDir::Files);
     connect(this, SIGNAL(dataPathChanged()),
             ui->specialJudge, SLOT(refreshFileList()));
+    connect(this, SIGNAL(dataPathChanged()),
+            ui->interactorPath, SLOT(refreshFileList()));
     
     ui->sourceFileName->setValidator(new QRegExpValidator(QRegExp("\\w+"), this));
     ui->inputFileName->setValidator(new QRegExpValidator(QRegExp("(\\w+)(\\.\\w+)?"), this));
@@ -49,6 +52,8 @@ TaskEditWidget::TaskEditWidget(QWidget *parent) :
             this, SLOT(setToTraditional(bool)));
     connect(ui->answersOnlyButton, SIGNAL(toggled(bool)),
             this, SLOT(setToAnswersOnly(bool)));
+    connect(ui->interactionButton, SIGNAL(toggled(bool)),
+            this, SLOT(setToInteraction(bool)));
     connect(ui->sourceFileName, SIGNAL(textChanged(QString)),
             this, SLOT(sourceFileNameChanged(QString)));
     connect(ui->inputFileName, SIGNAL(textChanged(QString)),
@@ -67,6 +72,8 @@ TaskEditWidget::TaskEditWidget(QWidget *parent) :
             this, SLOT(realPrecisionChanged(int)));
     connect(ui->specialJudge, SIGNAL(textChanged(QString)),
             this, SLOT(specialJudgeChanged(QString)));
+    connect(ui->interactorPath, SIGNAL(textChanged(QString)),
+            this, SLOT(interactorChanged(QString)));
     connect(ui->compilersList, SIGNAL(currentRowChanged(int)),
             this, SLOT(compilerSelectionChanged()));
     connect(ui->configurationSelect, SIGNAL(currentIndexChanged(int)),
@@ -114,8 +121,10 @@ void TaskEditWidget::setEditTask(Task *task)
     ui->diffArguments->setText(editTask->getDiffArguments());
     ui->realPrecision->setValue(editTask->getRealPrecision());
     ui->specialJudge->setText(editTask->getSpecialJudge());
+    ui->interactorPath->setText(editTask->getInteractor());
     ui->standardInputCheck->setChecked(editTask->getStandardInputCheck());
     ui->standardOutputCheck->setChecked(editTask->getStandardOutputCheck());
+    ui->interactorPath->setVisible(editTask->getTaskType() == Task::Interaction);
     ui->answerFileExtension->setText(editTask->getAnswerFileExtension());
     refreshCompilerConfiguration();
     if (editTask->getTaskType() == Task::Traditional) {
@@ -124,6 +133,8 @@ void TaskEditWidget::setEditTask(Task *task)
     if (editTask->getTaskType() == Task::AnswersOnly) {
         ui->answersOnlyButton->setChecked(true);
     }
+    if(editTask->getTaskType() == Task::Interaction)
+        ui->interactionButton->setChecked(true);
     refreshWidgetState();
 }
 
@@ -135,21 +146,25 @@ void TaskEditWidget::setSettings(Settings *_settings)
 void TaskEditWidget::refreshWidgetState()
 {
     if (! editTask) return;
-    bool check = editTask->getTaskType() == Task::Traditional;
-    ui->sourceFileName->setEnabled(check);
-    ui->sourceFileNameLabel->setEnabled(check);
-    ui->inputFileName->setEnabled(check && ! editTask->getStandardInputCheck());
-    ui->inputFileNameLabel->setEnabled(check);
-    ui->standardInputCheck->setEnabled(check);
-    ui->outputFileName->setEnabled(check && ! editTask->getStandardOutputCheck());
-    ui->outputFileNameLabel->setEnabled(check);
-    ui->standardOutputCheck->setEnabled(check);
-    ui->compilerSettingsLabel->setEnabled(check);
-    ui->compilersList->setEnabled(check);
-    ui->configurationLabel->setEnabled(check);
-    ui->configurationSelect->setEditable(check);
-    ui->answerFileExtension->setEnabled(! check);
-    ui->answerFileExtensionLabel->setEnabled(! check);
+    ui->interactorPathLabel->setVisible(editTask->getTaskType() == Task::Interaction);
+    ui->interactorPath->setVisible(editTask->getTaskType() == Task::Interaction);
+    ui->comparisonSetting->setVisible(editTask->getTaskType() != Task::Interaction);
+    ui->sourceFileName->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
+    ui->sourceFileNameLabel->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
+    ui->inputFileName->setEnabled((editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction) && ! editTask->getStandardInputCheck());
+    ui->inputFileNameLabel->setEnabled(editTask->getTaskType() == Task::Traditional|| editTask->getTaskType() == Task::Interaction);
+    ui->standardInputCheck->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
+    ui->outputFileName->setEnabled(editTask->getTaskType() == Task::Traditional && ! editTask->getStandardOutputCheck());
+    ui->outputFileNameLabel->setEnabled(editTask->getTaskType() == Task::Traditional);
+    ui->standardOutputCheck->setEnabled(editTask->getTaskType() == Task::Traditional);
+    ui->compilerSettingsLabel->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
+    ui->compilersList->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
+    ui->configurationLabel->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
+    ui->configurationSelect->setEditable(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
+    ui->comparisonMode->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::AnswersOnly);
+    ui->answerFileExtension->setEnabled(editTask->getTaskType() == Task::AnswersOnly);
+    ui->answerFileExtensionLabel->setEnabled(editTask->getTaskType() == Task::AnswersOnly);
+    ui->comparisonSetting->setCurrentIndex(ui->comparisonMode->currentIndex());
 }
 
 void TaskEditWidget::problemTitleChanged(const QString &text)
@@ -162,6 +177,8 @@ void TaskEditWidget::setToTraditional(bool check)
 {
     if (! check || ! editTask) return;
     editTask->setTaskType(Task::Traditional);
+    editTask->setStandardOutputCheck(false);
+    ui->standardOutputCheck->setCheckState(Qt::Unchecked);
     refreshWidgetState();
 }
 
@@ -169,6 +186,17 @@ void TaskEditWidget::setToAnswersOnly(bool check)
 {
     if (! check || ! editTask) return;
     editTask->setTaskType(Task::AnswersOnly);
+    editTask->setStandardOutputCheck(false);
+    ui->standardOutputCheck->setCheckState(Qt::Unchecked);
+    refreshWidgetState();
+}
+
+void TaskEditWidget::setToInteraction(bool check)
+{
+    if(!check || !editTask) return;
+    editTask->setTaskType(Task::Interaction);
+    editTask->setStandardOutputCheck(true);
+    ui->standardOutputCheck->setCheckState(Qt::Checked);
     refreshWidgetState();
 }
 
@@ -235,6 +263,12 @@ void TaskEditWidget::specialJudgeChanged(const QString &text)
 {
     if (! editTask) return;
     editTask->setSpecialJudge(text);
+}
+
+void TaskEditWidget::interactorChanged(const QString& text)
+{
+    if(! editTask) return;
+    editTask->setInteractor(text);
 }
 
 void TaskEditWidget::refreshProblemTitle(const QString &title)

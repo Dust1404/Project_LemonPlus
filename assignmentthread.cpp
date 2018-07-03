@@ -139,6 +139,8 @@ bool AssignmentThread::traditionalTaskPrepare()
             QDir(Settings::temporaryPath()).mkdir(contestantName);
             QFile::copy(Settings::sourcePath() + contestantName + QDir::separator() + sourceFile,
                         Settings::temporaryPath() + contestantName + QDir::separator() + sourceFile);
+            if(task->getTaskType() == Task::Interaction)
+                QFile::copy(Settings::dataPath() + task->getInteractor(), Settings::temporaryPath() + contestantName + QDir::separator() + "interactor.h");
             QStringList configurationNames = compilerList[i]->getConfigurationNames();
             QStringList compilerArguments = compilerList[i]->getCompilerArguments();
             QStringList interpreterArguments = compilerList[i]->getInterpreterArguments();
@@ -254,7 +256,7 @@ bool AssignmentThread::traditionalTaskPrepare()
 
 void AssignmentThread::run()
 {
-    if (task->getTaskType() == Task::Traditional)
+    if (task->getTaskType() != Task::AnswersOnly)
         if (! traditionalTaskPrepare()) return;
     
     if (stopJudging) return;
@@ -345,7 +347,7 @@ void AssignmentThread::assign()
     }
     thread->setSpecialJudgeTimeLimit(settings->getSpecialJudgeTimeLimit());
     thread->setDiffPath(settings->getDiffPath());
-    if (task->getTaskType() == Task::Traditional) {
+    if (task->getTaskType() == Task::Traditional || task->getTaskType() == Task::Interaction) {
         if (interpreterFlag) {
             thread->setExecutableFile(executableFile);
         } else {
@@ -367,7 +369,7 @@ void AssignmentThread::assign()
     thread->setInputFile(Settings::dataPath() + curTestCase->getInputFiles().at(curSingleCaseIndex));
     thread->setOutputFile(Settings::dataPath() + curTestCase->getOutputFiles().at(curSingleCaseIndex));
     thread->setFullScore(curTestCase->getFullScore());
-    if (task->getTaskType() == Task::Traditional) {
+    if (task->getTaskType() != Task::AnswersOnly) {
         thread->setEnvironment(environment);
         thread->setTimeLimit(qCeil(curTestCase->getTimeLimit() * timeLimitRatio));
         if (disableMemoryLimitCheck) {

@@ -144,6 +144,11 @@ void JudgingDialog::singleCaseFinished(int progress, int x, int y, int result)
         case Skipped:
             text = tr("Skipped");
             charFormat.setForeground(QBrush(Qt::darkCyan));
+            break;
+        case InteractorError:
+            text = tr("Interactor error");
+            charFormat.setForeground(QBrush(Qt::darkBlue));
+            break;
     }
     
     cursor->insertText(text, charFormat);

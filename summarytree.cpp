@@ -218,7 +218,7 @@ void SummaryTree::addTestCases()
     int index = indexOfTopLevelItem(curItem);
     Task *curTask = curContest->getTask(index);
     AddTestCasesWizard *wizard = new AddTestCasesWizard(this);
-    wizard->setSettings(settings, curTask->getTaskType() == Task::Traditional);
+    wizard->setSettings(settings, curTask->getTaskType() == Task::Traditional || curTask->getTaskType() == Task::Interaction, curTask->getTaskType() == Task::Interaction);
     if (wizard->exec() == QDialog::Accepted) {
         QList<QStringList> inputFiles = wizard->getMatchedInputFiles();
         QList<QStringList> outputFiles = wizard->getMatchedOutputFiles();

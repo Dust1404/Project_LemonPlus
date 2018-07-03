@@ -242,7 +242,7 @@ void Lemon::summarySelectionChanged()
         int testCaseIndex = parentItem->indexOfChild(curItem);
         Task *curTask = curContest->getTask(taskIndex);
         TestCase *curTestCase = curTask->getTestCase(testCaseIndex);
-        ui->testCaseEdit->setEditTestCase(curTestCase, curTask->getTaskType() == Task::Traditional);
+        ui->testCaseEdit->setEditTestCase(curTestCase, curTask->getTaskType() == Task::Traditional || curTask->getTaskType() == Task::Interaction, curTask->getTaskType() == Task::Interaction);
         ui->editWidget->setCurrentIndex(2);
     }
 }

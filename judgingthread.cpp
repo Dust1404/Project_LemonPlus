@@ -22,6 +22,7 @@
 
 #include <cstring>
 #include <cstdio>
+#include <QTime>
 #include "judgingthread.h"
 #include "settings.h"
 #include "task.h"
@@ -72,6 +73,9 @@ JudgingThread::JudgingThread(QObject *parent) :
     timeUsed = -1;
     memoryUsed = -1;
     judgedTimes = 0;
+
+    QTime   t =  QTime::currentTime();
+    qsrand(t.msec() + t.second() * 1000);
 }
 
 /*void JudgingThread::setCheckRejudgeMode(bool check)
@@ -652,23 +656,23 @@ void JudgingThread::runProgram()
     ZeroMemory(&pi, sizeof(pi));
     ZeroMemory(&sa, sizeof(sa));
     sa.bInheritHandle = TRUE;
-    
+
     if (task->getStandardInputCheck()) {
         si.hStdInput = CreateFile((const WCHAR*)(inputFile.utf16()), GENERIC_READ,
                                   FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, &sa,
                                   OPEN_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     }
-    
+
     if (task->getStandardOutputCheck()) {
         si.hStdOutput = CreateFile((const WCHAR*)((workingDirectory + "_tmpout").utf16()), GENERIC_WRITE,
                                    FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, &sa,
                                    CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
     }
-    
+
     si.hStdError = CreateFile((const WCHAR*)((workingDirectory + "_tmperr").utf16()), GENERIC_WRITE,
                               FILE_SHARE_READ | FILE_SHARE_WRITE | FILE_SHARE_DELETE, &sa,
                               CREATE_ALWAYS, FILE_ATTRIBUTE_NORMAL, NULL);
-    
+
     QString values = environment.toStringList().join(QString("")) + '\0';
     if (! CreateProcess(NULL, (WCHAR*)(QString("\"%1\" %2").arg(executableFile, arguments).utf16()), NULL, &sa,
                         TRUE, HIGH_PRIORITY_CLASS | CREATE_NO_WINDOW, (LPVOID)(values.toLocal8Bit().data()),
@@ -944,7 +948,7 @@ void JudgingThread::judgeTraditionalTask()
             return;
         }
     }
-    
+
     runProgram();
     if (stopJudging) return;
     
@@ -964,33 +968,6 @@ void JudgingThread::judgeTraditionalTask()
     if (stopJudging) return;
     
     if (timeUsed > timeLimit) {
-        /*if (score > 0 && (timeUsed <= timeLimit * (1 + extraTimeRatio)
-                                              || timeUsed <= timeLimit + 1000 * extraTimeRatio)) {
-            int minTimeUsed = timeUsed, curMemoryUsed = memoryUsed;
-            bool flag = true;
-            for (int i = 0; i < 10; i ++) {
-                runProgram();
-                if (stopJudging) return;
-                if (result != CorrectAnswer) {
-                    flag = false;
-                    break;
-                }
-                if (timeUsed < minTimeUsed) {
-                    minTimeUsed = timeUsed;
-                    curMemoryUsed = memoryUsed;
-                    judgeOutput();
-                    if (stopJudging) return;
-                    if (timeUsed <= timeLimit) break;
-                }
-            }
-            timeUsed = minTimeUsed;
-            memoryUsed = curMemoryUsed;
-            if (! flag || timeUsed > timeLimit) {
-                score = 0;
-                result = TimeLimitExceeded;
-                message = "";
-            }
-        } else {*/
             if (score > 0 && (timeUsed <= timeLimit * (1 + extraTimeRatio)
                                                     || timeUsed <= timeLimit + 1000 * extraTimeRatio)) {
                 needRejudge = true;
@@ -998,7 +975,6 @@ void JudgingThread::judgeTraditionalTask()
             score = 0;
             result = TimeLimitExceeded;
             message = "";
-        //}
     }
     
     if (! task->getStandardInputCheck()) {
@@ -1032,6 +1008,108 @@ void JudgingThread::judgeAnswersOnlyTask()
     }
 }
 
+void JudgingThread::judgeInteractionTask()
+{
+    if (! QFileInfo(inputFile).exists()) {
+        score = 0;
+        result = FileError;
+        message = tr("Cannot find input file");
+        return;
+    }
+    if (! task->getStandardInputCheck()) {
+        if (! QFile::copy(inputFile, workingDirectory + task->getInputFileName())) {
+            score = 0;
+            result = FileError;
+            message = tr("Cannot copy input file");
+            return;
+        }
+    }
+
+    arguments.clear();
+    QStringList argumentsList;
+    QString score_log = "_score_";
+    for(int i = 0; i != 5; ++i)
+        score_log.push_back(qrand() % 26 + 'a');
+    argumentsList << QString("%1").arg(fullScore);
+    argumentsList << workingDirectory + score_log;
+    argumentsList << workingDirectory + "_message";
+    arguments = argumentsList.join(' ');
+
+    runProgram();
+    if (stopJudging) return;
+
+    if (result != CorrectAnswer) {
+        if (! task->getStandardInputCheck()) {
+            QFile::remove(workingDirectory + task->getInputFileName());
+        }
+        if (! task->getStandardOutputCheck()) {
+            QFile::remove(workingDirectory + task->getOutputFileName());
+        } else {
+            QFile::remove(workingDirectory + "_tmpout");
+        }
+        return;
+    }
+
+    QFile scoreFile(workingDirectory + score_log);
+    if (! scoreFile.open(QFile::ReadOnly)) {
+        score = 0;
+        result = InteractorError;
+        message = tr("Cannot read score log");
+        return;
+    }
+
+    QTextStream scoreStream(&scoreFile);
+    scoreStream >> score;
+    if (scoreStream.status() == QTextStream::ReadCorruptData) {
+        score = 0;
+        result = InteractorError;
+        message = tr("Cannot read score log");
+        return;
+    }
+    scoreFile.close();
+
+    if (score < 0) {
+        score = 0;
+        result = InteractorError;
+        message = tr("Score is below zero");
+        return;
+    }
+
+    QFile messageFile(workingDirectory + "_message");
+    if (messageFile.open(QFile::ReadOnly)) {
+        QTextStream messageStream(&messageFile);
+        message = messageStream.readAll();
+        messageFile.close();
+    }
+
+    if (score == 0) result = WrongAnswer;
+    if (0 < score && score < fullScore) result = PartlyCorrect;
+    if (score >= fullScore) result = CorrectAnswer;
+
+    scoreFile.remove();
+    messageFile.remove();
+    if (stopJudging) return;
+
+    if (timeUsed > timeLimit) {
+        if (score > 0 && (timeUsed <= timeLimit * (1 + extraTimeRatio)
+                                                || timeUsed <= timeLimit + 1000 * extraTimeRatio)) {
+            needRejudge = true;
+        }
+        score = 0;
+        result = TimeLimitExceeded;
+        message = "";
+    }
+
+    if (! task->getStandardInputCheck()) {
+        QFile::remove(workingDirectory + task->getInputFileName());
+    }
+    if (! task->getStandardOutputCheck()) {
+        QFile::remove(workingDirectory + task->getOutputFileName());
+    } else {
+        QFile::remove(workingDirectory + "_tmpout");
+    }
+}
+
 void JudgingThread::run()
 {
     ++judgedTimes;
@@ -1042,6 +1120,9 @@ void JudgingThread::run()
             break;
         case Task::AnswersOnly:
             judgeAnswersOnlyTask();
+            break;
+        case Task::Interaction:
+            judgeInteractionTask();
             break;
     }
 }

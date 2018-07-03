@@ -62,7 +62,7 @@ AddTestCasesWizard::~AddTestCasesWizard()
     delete ui;
 }
 
-void AddTestCasesWizard::setSettings(Settings *_settings, bool check)
+void AddTestCasesWizard::setSettings(Settings *_settings, bool check, bool interactorCheck)
 {
     settings = _settings;
     ui->fullScore->setText(QString("%1").arg(settings->getDefaultFullScore()));
@@ -74,6 +74,8 @@ void AddTestCasesWizard::setSettings(Settings *_settings, bool check)
     ui->memoryLimit->setEnabled(check);
     ui->memoryLimitLabel->setEnabled(check);
     ui->mbLabel->setEnabled(check);
+    ui->outputFilesPattern->setDisabled(interactorCheck);
+    ui->outputFilesPatternLabel->setDisabled(interactorCheck);
     refreshButtonState();
 }
 
@@ -266,14 +268,21 @@ void AddTestCasesWizard::searchMatchedFiles()
     QMap<QString, int> loc;
     QList< QPair<QString, QString> > singleCases;
     QList< QStringList > matchedPart;
-    for (int i = 0; i < inputFiles.size(); i ++) {
-        loc[inputFilesMatchedPart[i].join("*")] = i;
-    }
-    for (int i = 0; i < outputFiles.size(); i ++) {
-        if (loc.count(outputFilesMatchedPart[i].join("*")) > 0) {
-            int partner = loc[outputFilesMatchedPart[i].join("*")];
-            singleCases.append(qMakePair(inputFiles[partner], outputFiles[i]));
-            matchedPart.append(outputFilesMatchedPart[i]);
+    if(ui->outputFilesPattern->isEnabled()) {
+        for (int i = 0; i < inputFiles.size(); i ++) {
+            loc[inputFilesMatchedPart[i].join("*")] = i;
+        }
+        for (int i = 0; i < outputFiles.size(); i ++) {
+            if (loc.count(outputFilesMatchedPart[i].join("*")) > 0) {
+                int partner = loc[outputFilesMatchedPart[i].join("*")];
+                singleCases.append(qMakePair(inputFiles[partner], outputFiles[i]));
+                matchedPart.append(outputFilesMatchedPart[i]);
+            }
+        }
+    } else {
+        for (int i = 0; i < inputFiles.size(); i ++) {
+                singleCases.append(qMakePair(inputFiles[i], QString("")));
+                matchedPart.append(inputFilesMatchedPart[i]);
         }
     }
     
@@ -342,7 +351,7 @@ bool AddTestCasesWizard::validateCurrentPage()
             QMessageBox::warning(this, tr("Error"), tr("Empty input files pattern!"), QMessageBox::Close);
             return false;
         }
-        if (ui->outputFilesPattern->text().isEmpty()) {
+        if (ui->outputFilesPattern->text().isEmpty() && ui->outputFilesPattern->isEnabled()) {
             ui->outputFilesPattern->setFocus();
             QMessageBox::warning(this, tr("Error"), tr("Empty output files pattern!"), QMessageBox::Close);
             return false;

@@ -55,6 +55,7 @@ private slots:
     void problemTitleChanged(const QString&);
     void setToTraditional(bool);
     void setToAnswersOnly(bool);
+    void setToInteraction(bool);
     void sourceFileNameChanged(const QString&);
     void inputFileNameChanged(const QString&);
     void outputFileNameChanged(const QString&);
@@ -64,6 +65,7 @@ private slots:
     void diffArgumentsChanged(const QString&);
     void realPrecisionChanged(int);
     void specialJudgeChanged(const QString&);
+    void interactorChanged(const QString&);
     void refreshProblemTitle(const QString&);
     void refreshCompilerConfiguration();
     void compilerSelectionChanged();

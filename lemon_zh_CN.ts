@@ -492,59 +492,59 @@
         <translation type="unfinished">正则表达式</translation>
     </message>
     <message>
-        <location filename="addtestcaseswizard.cpp" line="302"/>
+        <location filename="addtestcaseswizard.cpp" line="311"/>
         <source>Test Case #%1</source>
         <translation type="unfinished">测试点 #%1</translation>
     </message>
     <message>
-        <location filename="addtestcaseswizard.cpp" line="323"/>
-        <location filename="addtestcaseswizard.cpp" line="328"/>
-        <location filename="addtestcaseswizard.cpp" line="333"/>
+        <location filename="addtestcaseswizard.cpp" line="332"/>
+        <location filename="addtestcaseswizard.cpp" line="337"/>
         <location filename="addtestcaseswizard.cpp" line="342"/>
-        <location filename="addtestcaseswizard.cpp" line="347"/>
-        <location filename="addtestcaseswizard.cpp" line="353"/>
-        <location filename="addtestcaseswizard.cpp" line="360"/>
-        <location filename="addtestcaseswizard.cpp" line="368"/>
+        <location filename="addtestcaseswizard.cpp" line="351"/>
+        <location filename="addtestcaseswizard.cpp" line="356"/>
+        <location filename="addtestcaseswizard.cpp" line="362"/>
+        <location filename="addtestcaseswizard.cpp" line="369"/>
+        <location filename="addtestcaseswizard.cpp" line="377"/>
         <source>Error</source>
         <translation type="unfinished">错误</translation>
     </message>
     <message>
-        <location filename="addtestcaseswizard.cpp" line="323"/>
+        <location filename="addtestcaseswizard.cpp" line="332"/>
         <source>Empty full score!</source>
         <translation type="unfinished">分值为空！</translation>
     </message>
     <message>
-        <location filename="addtestcaseswizard.cpp" line="328"/>
+        <location filename="addtestcaseswizard.cpp" line="337"/>
         <source>Empty time limit!</source>
         <translation type="unfinished">时间限制为空！</translation>
     </message>
     <message>
-        <location filename="addtestcaseswizard.cpp" line="333"/>
+        <location filename="addtestcaseswizard.cpp" line="342"/>
         <source>Empty memory limit!</source>
         <translation type="unfinished">空间限制为空！</translation>
     </message>
     <message>
-        <location filename="addtestcaseswizard.cpp" line="342"/>
+        <location filename="addtestcaseswizard.cpp" line="351"/>
         <source>Empty input files pattern!</source>
         <translation type="unfinished">输入文件格式为空！</translation>
     </message>
     <message>
-        <location filename="addtestcaseswizard.cpp" line="347"/>
+        <location filename="addtestcaseswizard.cpp" line="356"/>
         <source>Empty output files pattern!</source>
         <translation type="unfinished">输出文件格式为空！</translation>
     </message>
     <message>
-        <location filename="addtestcaseswizard.cpp" line="354"/>
+        <location filename="addtestcaseswizard.cpp" line="363"/>
         <source>Argument &lt;%1&gt; appears more than once in input files pattern!</source>
         <translation type="unfinished">参数&lt;%1&gt;在输入文件格式中出现多次！</translation>
     </message>
     <message>
-        <location filename="addtestcaseswizard.cpp" line="361"/>
+        <location filename="addtestcaseswizard.cpp" line="370"/>
         <source>Argument &lt;%1&gt; appears more than once in output files pattern!</source>
         <translation type="unfinished">参数&lt;%1&gt;在输出文件格式中出现多次！</translation>
     </message>
     <message>
-        <location filename="addtestcaseswizard.cpp" line="368"/>
+        <location filename="addtestcaseswizard.cpp" line="377"/>
         <source>Invalid regular expression!</source>
         <translation type="unfinished">无效正则表达式！</translation>
     </message>
@@ -947,18 +947,23 @@
         <translation type="unfinished">忽略</translation>
     </message>
     <message>
-        <location filename="detaildialog.cpp" line="173"/>
-        <location filename="detaildialog.cpp" line="181"/>
+        <location filename="detaildialog.cpp" line="162"/>
+        <source>Interactor Error</source>
+        <translation type="unfinished">交互库错误</translation>
+    </message>
+    <message>
+        <location filename="detaildialog.cpp" line="176"/>
+        <location filename="detaildialog.cpp" line="184"/>
         <source>Invalid</source>
         <translation type="unfinished">不可用</translation>
     </message>
     <message>
-        <location filename="detaildialog.cpp" line="230"/>
+        <location filename="detaildialog.cpp" line="233"/>
         <source>Compile Message</source>
         <translation type="unfinished">编译信息</translation>
     </message>
     <message>
-        <location filename="detaildialog.cpp" line="237"/>
+        <location filename="detaildialog.cpp" line="240"/>
         <source>Message</source>
         <translation type="unfinished">信息</translation>
     </message>
@@ -1173,106 +1178,111 @@
         <translation type="unfinished">忽略</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="168"/>
-        <location filename="exportutil.cpp" line="176"/>
-        <location filename="exportutil.cpp" line="265"/>
-        <location filename="exportutil.cpp" line="272"/>
-        <location filename="exportutil.cpp" line="341"/>
-        <location filename="exportutil.cpp" line="348"/>
-        <location filename="exportutil.cpp" line="418"/>
-        <location filename="exportutil.cpp" line="425"/>
+        <location filename="exportutil.cpp" line="153"/>
+        <source>Interactor Error</source>
+        <translation type="unfinished">交互库错误</translation>
+    </message>
+    <message>
+        <location filename="exportutil.cpp" line="171"/>
+        <location filename="exportutil.cpp" line="179"/>
+        <location filename="exportutil.cpp" line="268"/>
+        <location filename="exportutil.cpp" line="275"/>
+        <location filename="exportutil.cpp" line="344"/>
+        <location filename="exportutil.cpp" line="351"/>
+        <location filename="exportutil.cpp" line="421"/>
+        <location filename="exportutil.cpp" line="428"/>
         <source>Invalid</source>
         <translation type="unfinished">不可用</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="195"/>
+        <location filename="exportutil.cpp" line="198"/>
         <source>Return to top</source>
         <translation type="unfinished">返回顶部</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="203"/>
-        <location filename="exportutil.cpp" line="285"/>
-        <location filename="exportutil.cpp" line="292"/>
-        <location filename="exportutil.cpp" line="353"/>
-        <location filename="exportutil.cpp" line="361"/>
-        <location filename="exportutil.cpp" line="434"/>
-        <location filename="exportutil.cpp" line="443"/>
-        <location filename="exportutil.cpp" line="447"/>
+        <location filename="exportutil.cpp" line="206"/>
+        <location filename="exportutil.cpp" line="288"/>
+        <location filename="exportutil.cpp" line="295"/>
+        <location filename="exportutil.cpp" line="356"/>
+        <location filename="exportutil.cpp" line="364"/>
+        <location filename="exportutil.cpp" line="437"/>
+        <location filename="exportutil.cpp" line="446"/>
+        <location filename="exportutil.cpp" line="450"/>
         <source>Lemon</source>
         <translation type="unfinished">Lemon</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="203"/>
-        <location filename="exportutil.cpp" line="292"/>
-        <location filename="exportutil.cpp" line="361"/>
+        <location filename="exportutil.cpp" line="206"/>
+        <location filename="exportutil.cpp" line="295"/>
+        <location filename="exportutil.cpp" line="364"/>
         <source>Cannot open file %1</source>
         <translation type="unfinished">无法打开%1</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="218"/>
+        <location filename="exportutil.cpp" line="221"/>
         <source>Contest Result</source>
         <translation type="unfinished">比赛结果</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="246"/>
+        <location filename="exportutil.cpp" line="249"/>
         <source>Rank List</source>
         <translation type="unfinished">排名表</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="248"/>
-        <location filename="exportutil.cpp" line="326"/>
-        <location filename="exportutil.cpp" line="400"/>
+        <location filename="exportutil.cpp" line="251"/>
+        <location filename="exportutil.cpp" line="329"/>
+        <location filename="exportutil.cpp" line="403"/>
         <source>Rank</source>
         <translation type="unfinished">排名</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="249"/>
-        <location filename="exportutil.cpp" line="326"/>
-        <location filename="exportutil.cpp" line="401"/>
+        <location filename="exportutil.cpp" line="252"/>
+        <location filename="exportutil.cpp" line="329"/>
+        <location filename="exportutil.cpp" line="404"/>
         <source>Name</source>
         <translation type="unfinished">名称</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="252"/>
-        <location filename="exportutil.cpp" line="330"/>
-        <location filename="exportutil.cpp" line="404"/>
+        <location filename="exportutil.cpp" line="255"/>
+        <location filename="exportutil.cpp" line="333"/>
+        <location filename="exportutil.cpp" line="407"/>
         <source>Total Score</source>
         <translation type="unfinished">总分</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="279"/>
+        <location filename="exportutil.cpp" line="282"/>
         <source>Contestant: %1</source>
         <translation type="unfinished">选手：%1</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="285"/>
-        <location filename="exportutil.cpp" line="353"/>
-        <location filename="exportutil.cpp" line="434"/>
+        <location filename="exportutil.cpp" line="288"/>
+        <location filename="exportutil.cpp" line="356"/>
+        <location filename="exportutil.cpp" line="437"/>
         <source>Export is done</source>
         <translation type="unfinished">导出完成</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="443"/>
+        <location filename="exportutil.cpp" line="446"/>
         <source>No contestant in current contest</source>
         <translation type="unfinished">不存在选手</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="447"/>
+        <location filename="exportutil.cpp" line="450"/>
         <source>No task in current contest</source>
         <translation type="unfinished">不存在试题</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="451"/>
+        <location filename="exportutil.cpp" line="454"/>
         <source>HTML Document (*.html);;CSV (*.csv)</source>
         <translation type="unfinished">HTML文档 (*.html);;逗号分隔符 (*.csv)</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="455"/>
+        <location filename="exportutil.cpp" line="458"/>
         <source>;;Excel Workbook (*.xls)</source>
         <translation type="unfinished">;;Excel工作簿 (*.xls)</translation>
     </message>
     <message>
-        <location filename="exportutil.cpp" line="459"/>
+        <location filename="exportutil.cpp" line="462"/>
         <source>Export Result</source>
         <translation type="unfinished">导出成绩</translation>
     </message>
@@ -1506,32 +1516,37 @@
         <translation type="unfinished">忽略</translation>
     </message>
     <message>
-        <location filename="judgingdialog.cpp" line="163"/>
+        <location filename="judgingdialog.cpp" line="149"/>
+        <source>Interactor error</source>
+        <translation type="unfinished">交互库错误</translation>
+    </message>
+    <message>
+        <location filename="judgingdialog.cpp" line="168"/>
         <source>Start judging task %1</source>
         <translation type="unfinished">开始测试试题%1</translation>
     </message>
     <message>
-        <location filename="judgingdialog.cpp" line="173"/>
+        <location filename="judgingdialog.cpp" line="178"/>
         <source>Start judging contestant %1</source>
         <translation type="unfinished">开始测试选手%1</translation>
     </message>
     <message>
-        <location filename="judgingdialog.cpp" line="198"/>
+        <location filename="judgingdialog.cpp" line="203"/>
         <source>Cannot find valid source file</source>
         <translation type="unfinished">未找到源程序</translation>
     </message>
     <message>
-        <location filename="judgingdialog.cpp" line="202"/>
+        <location filename="judgingdialog.cpp" line="207"/>
         <source>Compile error</source>
         <translation type="unfinished">编译错误</translation>
     </message>
     <message>
-        <location filename="judgingdialog.cpp" line="206"/>
+        <location filename="judgingdialog.cpp" line="211"/>
         <source>Compile time limit exceeded</source>
         <translation type="unfinished">编译超时</translation>
     </message>
     <message>
-        <location filename="judgingdialog.cpp" line="210"/>
+        <location filename="judgingdialog.cpp" line="215"/>
         <source>Invalid compiler</source>
         <translation type="unfinished">无效编译器</translation>
     </message>
@@ -1539,73 +1554,94 @@
 <context>
     <name>JudgingThread</name>
     <message>
-        <location filename="judgingthread.cpp" line="198"/>
-        <location filename="judgingthread.cpp" line="300"/>
-        <location filename="judgingthread.cpp" line="459"/>
+        <location filename="judgingthread.cpp" line="202"/>
+        <location filename="judgingthread.cpp" line="304"/>
+        <location filename="judgingthread.cpp" line="463"/>
         <source>Cannot open contestant&apos;s output file</source>
         <translation type="unfinished">无法打开选手输出文件</translation>
     </message>
     <message>
-        <location filename="judgingthread.cpp" line="205"/>
-        <location filename="judgingthread.cpp" line="307"/>
-        <location filename="judgingthread.cpp" line="466"/>
+        <location filename="judgingthread.cpp" line="209"/>
+        <location filename="judgingthread.cpp" line="311"/>
+        <location filename="judgingthread.cpp" line="470"/>
         <source>Cannot open standard output file</source>
         <translation type="unfinished">无法打开标准输出文件</translation>
     </message>
     <message>
-        <location filename="judgingthread.cpp" line="274"/>
-        <location filename="judgingthread.cpp" line="419"/>
-        <location filename="judgingthread.cpp" line="515"/>
+        <location filename="judgingthread.cpp" line="278"/>
+        <location filename="judgingthread.cpp" line="423"/>
+        <location filename="judgingthread.cpp" line="519"/>
         <source>Read %1 but expect %2</source>
         <translation type="unfinished">读取到%1，但期望%2</translation>
     </message>
     <message>
-        <location filename="judgingthread.cpp" line="482"/>
+        <location filename="judgingthread.cpp" line="486"/>
         <source>Invalid characters found</source>
         <translation type="unfinished">包含无效字符</translation>
     </message>
     <message>
-        <location filename="judgingthread.cpp" line="490"/>
+        <location filename="judgingthread.cpp" line="494"/>
         <source>Invalid characters in standard output file</source>
         <translation type="unfinished">标准输出文件中包含无效字符</translation>
     </message>
     <message>
-        <location filename="judgingthread.cpp" line="256"/>
-        <location filename="judgingthread.cpp" line="499"/>
+        <location filename="judgingthread.cpp" line="260"/>
+        <location filename="judgingthread.cpp" line="503"/>
         <source>Shorter than standard output</source>
         <translation type="unfinished">比标准输出短</translation>
     </message>
     <message>
-        <location filename="judgingthread.cpp" line="265"/>
-        <location filename="judgingthread.cpp" line="507"/>
+        <location filename="judgingthread.cpp" line="269"/>
+        <location filename="judgingthread.cpp" line="511"/>
         <source>Longer than standard output</source>
         <translation type="unfinished">比标准输出长</translation>
     </message>
     <message>
-        <location filename="judgingthread.cpp" line="388"/>
+        <location filename="judgingthread.cpp" line="392"/>
         <source>Presentation error</source>
         <translation type="unfinished">格式错误</translation>
     </message>
     <message>
-        <location filename="judgingthread.cpp" line="539"/>
-        <location filename="judgingthread.cpp" line="936"/>
+        <location filename="judgingthread.cpp" line="543"/>
+        <location filename="judgingthread.cpp" line="940"/>
         <source>Cannot find standard input file</source>
         <translation type="unfinished">找不到标准输入文件</translation>
     </message>
     <message>
-        <location filename="judgingthread.cpp" line="546"/>
+        <location filename="judgingthread.cpp" line="550"/>
         <source>Cannot find contestant&apos;s output file</source>
         <translation type="unfinished">找不到选手输出文件</translation>
     </message>
     <message>
-        <location filename="judgingthread.cpp" line="553"/>
+        <location filename="judgingthread.cpp" line="557"/>
         <source>Cannot find standard output file</source>
         <translation type="unfinished">找不到标准输出文件</translation>
     </message>
     <message>
-        <location filename="judgingthread.cpp" line="943"/>
+        <location filename="judgingthread.cpp" line="947"/>
         <source>Cannot copy standard input file</source>
         <translation type="unfinished">无法复制标准输入文件</translation>
+    </message>
+    <message>
+        <location filename="judgingthread.cpp" line="1016"/>
+        <source>Cannot find input file</source>
+        <translation type="unfinished">找不到输入文件</translation>
+    </message>
+    <message>
+        <location filename="judgingthread.cpp" line="1023"/>
+        <source>Cannot copy input file</source>
+        <translation type="unfinished">无法复制输入文件</translation>
+    </message>
+    <message>
+        <location filename="judgingthread.cpp" line="1057"/>
+        <location filename="judgingthread.cpp" line="1066"/>
+        <source>Cannot read score log</source>
+        <translation type="unfinished">无法读取分数</translation>
+    </message>
+    <message>
+        <location filename="judgingthread.cpp" line="1074"/>
+        <source>Score is below zero</source>
+        <translation type="unfinished">分数小于0</translation>
     </message>
 </context>
 <context>
@@ -2160,129 +2196,140 @@
     </message>
     <message>
         <location filename="forms_unix/taskeditwidget.ui" line="29"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="29"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="200"/>
         <source>Problem Title</source>
         <translation type="unfinished">试题标题</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="104"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="104"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="123"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="460"/>
         <source>Source File Name</source>
         <translation type="unfinished">源文件名称</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="123"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="123"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="64"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="431"/>
         <source>Input File Name</source>
         <translation type="unfinished">输入文件名</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="152"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="152"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="145"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="415"/>
         <source>Output File Name</source>
         <translation type="unfinished">输出文件名</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="136"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="136"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="155"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="473"/>
         <source>Standard input</source>
         <translation type="unfinished">标准输入</translation>
     </message>
     <message>
         <location filename="forms_unix/taskeditwidget.ui" line="48"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="48"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="80"/>
         <source>Task Type</source>
         <translation type="unfinished">试题类型</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="63"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="63"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="82"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="263"/>
         <source>Traditional</source>
         <translation type="unfinished">传统型</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="73"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="73"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="92"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="273"/>
         <source>Answers Only</source>
         <translation type="unfinished">答案提交型</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="165"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="165"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="181"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="441"/>
         <source>Standard output</source>
         <translation type="unfinished">标准输出</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="181"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="181"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="171"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="61"/>
         <source>Comparison Mode</source>
         <translation type="unfinished">比较模式</translation>
     </message>
     <message>
         <location filename="forms_unix/taskeditwidget.ui" line="192"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="192"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="24"/>
         <source>Line-by-line mode</source>
         <translation type="unfinished">逐行比较模式</translation>
     </message>
     <message>
         <location filename="forms_unix/taskeditwidget.ui" line="197"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="197"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="29"/>
         <source>Line-by-line mode (ignore extra spaces and tabs)</source>
         <translation type="unfinished">逐行比较模式（忽略多余空格和制表符）</translation>
     </message>
     <message>
         <location filename="forms_unix/taskeditwidget.ui" line="202"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="202"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="34"/>
         <source>External tool mode (diff)</source>
         <translation type="unfinished">外部工具模式（diff）</translation>
     </message>
     <message>
         <location filename="forms_unix/taskeditwidget.ui" line="207"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="207"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="39"/>
         <source>Real number mode</source>
         <translation type="unfinished">实数比较模式</translation>
     </message>
     <message>
         <location filename="forms_unix/taskeditwidget.ui" line="212"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="212"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="44"/>
         <source>Special judge mode</source>
         <translation type="unfinished">自定义校验器模式</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="244"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="244"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="289"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="111"/>
         <source>Arguments:</source>
         <translation type="unfinished">参数：</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="267"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="267"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="312"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="134"/>
         <source>Real Number Precision:</source>
         <translation type="unfinished">实数精度：</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="293"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="293"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="338"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="160"/>
         <source>digits</source>
         <translation type="unfinished">位</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="347"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="347"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="483"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="486"/>
+        <source>Interactor Path</source>
+        <translation type="unfinished">交互库路径</translation>
+    </message>
+    <message>
+        <location filename="forms_unix/taskeditwidget.ui" line="243"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="233"/>
         <source>Compiler Settings</source>
         <translation type="unfinished">编译器设置</translation>
     </message>
     <message>
         <location filename="forms_unix/taskeditwidget.ui" line="394"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="394"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="327"/>
         <source>Configuration:</source>
         <translation type="unfinished">配置：</translation>
     </message>
     <message>
         <location filename="forms_unix/taskeditwidget.ui" line="429"/>
-        <location filename="forms_win32/taskeditwidget.ui" line="429"/>
+        <location filename="forms_win32/taskeditwidget.ui" line="362"/>
         <source>Extension of Contestant&apos;s Answer File</source>
         <translation type="unfinished">选手答案文件扩展名</translation>
+    </message>
+    <message>
+        <location filename="forms_win32/taskeditwidget.ui" line="280"/>
+        <source>Interaction</source>
+        <translation type="unfinished">交互型</translation>
     </message>
 </context>
 <context>
@@ -2354,18 +2401,18 @@
         <translation type="unfinished">MB</translation>
     </message>
     <message>
-        <location filename="testcaseeditwidget.cpp" line="128"/>
-        <location filename="testcaseeditwidget.cpp" line="134"/>
+        <location filename="testcaseeditwidget.cpp" line="129"/>
+        <location filename="testcaseeditwidget.cpp" line="135"/>
         <source>Error</source>
         <translation type="unfinished">错误</translation>
     </message>
     <message>
-        <location filename="testcaseeditwidget.cpp" line="128"/>
+        <location filename="testcaseeditwidget.cpp" line="129"/>
         <source>Empty input file name!</source>
         <translation type="unfinished">输入文件名为空！</translation>
     </message>
     <message>
-        <location filename="testcaseeditwidget.cpp" line="134"/>
+        <location filename="testcaseeditwidget.cpp" line="135"/>
         <source>Empty output file name!</source>
         <translation type="unfinished">输出文件名为空！</translation>
     </message>

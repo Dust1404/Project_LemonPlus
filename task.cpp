@@ -29,7 +29,7 @@ Task::Task(QObject *parent) :
     QObject(parent)
 {
     taskType = Traditional;
-    comparisonMode = LineByLineMode;
+    comparisonMode = IgnoreSpacesMode;
     diffArguments = "--ignore-space-change --text --brief";
     realPrecision = 3;
     standardInputCheck = false;
@@ -94,6 +94,11 @@ int Task::getRealPrecision() const
 const QString& Task::getSpecialJudge() const
 {
     return specialJudge;
+}
+
+const QString& Task::getInteractor() const
+{
+    return interactor;
 }
 
 QString Task::getCompilerConfiguration(const QString &compilerName) const
@@ -161,6 +166,11 @@ void Task::setRealPrecision(int precision)
 void Task::setSpecialJudge(const QString &fileName)
 {
     specialJudge = fileName;
+}
+
+void Task::setInteractor(const QString& fileName)
+{
+    interactor = fileName;
 }
 
 void Task::setCompilerConfiguration(const QString &compiler, const QString &configuration)
@@ -245,7 +255,7 @@ void Task::writeToStream(QDataStream &out)
     out << int(comparisonMode);
     out << diffArguments;
     out << realPrecision;
-    QString _specialJudge = specialJudge;
+    QString _specialJudge = taskType == Task::Interaction ? interactor : specialJudge;
     _specialJudge.replace(QDir::separator(), '/');
     out << _specialJudge;
     out << compilerConfiguration;
@@ -271,8 +281,13 @@ void Task::readFromStream(QDataStream &in)
     comparisonMode = ComparisonMode(tmp);
     in >> diffArguments;
     in >> realPrecision;
-    in >> specialJudge;
-    specialJudge.replace('/', QDir::separator());
+    QString _specialJudge;
+    in >> _specialJudge;
+    _specialJudge.replace('/', QDir::separator());
+    if(taskType == Task::Interaction)
+        interactor = _specialJudge;
+    else
+        specialJudge = _specialJudge;
     in >> compilerConfiguration;
     in >> answerFileExtension;
     in >> count;
