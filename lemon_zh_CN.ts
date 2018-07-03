@@ -2201,7 +2201,7 @@
         <translation type="unfinished">试题标题</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="123"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="135"/>
         <location filename="forms_win32/taskeditwidget.ui" line="460"/>
         <source>Source File Name</source>
         <translation type="unfinished">源文件名称</translation>
@@ -2213,13 +2213,13 @@
         <translation type="unfinished">输入文件名</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="145"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="157"/>
         <location filename="forms_win32/taskeditwidget.ui" line="415"/>
         <source>Output File Name</source>
         <translation type="unfinished">输出文件名</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="155"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="167"/>
         <location filename="forms_win32/taskeditwidget.ui" line="473"/>
         <source>Standard input</source>
         <translation type="unfinished">标准输入</translation>
@@ -2243,90 +2243,91 @@
         <translation type="unfinished">答案提交型</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="181"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="193"/>
         <location filename="forms_win32/taskeditwidget.ui" line="441"/>
         <source>Standard output</source>
         <translation type="unfinished">标准输出</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="171"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="183"/>
         <location filename="forms_win32/taskeditwidget.ui" line="61"/>
         <source>Comparison Mode</source>
         <translation type="unfinished">比较模式</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="192"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="204"/>
         <location filename="forms_win32/taskeditwidget.ui" line="24"/>
         <source>Line-by-line mode</source>
         <translation type="unfinished">逐行比较模式</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="197"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="209"/>
         <location filename="forms_win32/taskeditwidget.ui" line="29"/>
         <source>Line-by-line mode (ignore extra spaces and tabs)</source>
         <translation type="unfinished">逐行比较模式（忽略多余空格和制表符）</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="202"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="214"/>
         <location filename="forms_win32/taskeditwidget.ui" line="34"/>
         <source>External tool mode (diff)</source>
         <translation type="unfinished">外部工具模式（diff）</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="207"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="219"/>
         <location filename="forms_win32/taskeditwidget.ui" line="39"/>
         <source>Real number mode</source>
         <translation type="unfinished">实数比较模式</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="212"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="224"/>
         <location filename="forms_win32/taskeditwidget.ui" line="44"/>
         <source>Special judge mode</source>
         <translation type="unfinished">自定义校验器模式</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="289"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="301"/>
         <location filename="forms_win32/taskeditwidget.ui" line="111"/>
         <source>Arguments:</source>
         <translation type="unfinished">参数：</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="312"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="324"/>
         <location filename="forms_win32/taskeditwidget.ui" line="134"/>
         <source>Real Number Precision:</source>
         <translation type="unfinished">实数精度：</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="338"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="350"/>
         <location filename="forms_win32/taskeditwidget.ui" line="160"/>
         <source>digits</source>
         <translation type="unfinished">位</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="483"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="495"/>
         <location filename="forms_win32/taskeditwidget.ui" line="486"/>
         <source>Interactor Path</source>
         <translation type="unfinished">交互库路径</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="243"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="255"/>
         <location filename="forms_win32/taskeditwidget.ui" line="233"/>
         <source>Compiler Settings</source>
         <translation type="unfinished">编译器设置</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="394"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="406"/>
         <location filename="forms_win32/taskeditwidget.ui" line="327"/>
         <source>Configuration:</source>
         <translation type="unfinished">配置：</translation>
     </message>
     <message>
-        <location filename="forms_unix/taskeditwidget.ui" line="429"/>
+        <location filename="forms_unix/taskeditwidget.ui" line="441"/>
         <location filename="forms_win32/taskeditwidget.ui" line="362"/>
         <source>Extension of Contestant&apos;s Answer File</source>
         <translation type="unfinished">选手答案文件扩展名</translation>
     </message>
     <message>
+        <location filename="forms_unix/taskeditwidget.ui" line="104"/>
         <location filename="forms_win32/taskeditwidget.ui" line="280"/>
         <source>Interaction</source>
         <translation type="unfinished">交互型</translation>

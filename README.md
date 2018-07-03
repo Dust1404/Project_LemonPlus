@@ -71,7 +71,7 @@ make
 ```
 在某些版本，如Ubuntu 18.04下，可能无法双击运行编译出来的程序，请使用./lemon运行.或者通过.desktop快捷方式双击运行。
 
-安装后需要重新在本机环境编译源码目录下的`watcher_unix.cpp`，否则可能会出现无法运行程序的情况。
+安装后需要重新在本机环境编译源码目录下的`watcher_unix.c`，否则可能会出现无法运行程序的情况。
 
 # FAQ
 - 无法使用lemon打开lemon+的.cdf。这是正常的，lemon+向lemon兼容，即可以打开lemon的.cdf，但由于lemon+的.cdf新增了一些内容，lemon可能无法打开。
