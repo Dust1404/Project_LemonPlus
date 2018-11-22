@@ -37,7 +37,6 @@ GeneralSettings::GeneralSettings(QWidget *parent) :
     ui->compileTimeLimit->setValidator(new QIntValidator(1, Settings::upperBoundForTimeLimit(), this));
     ui->specialJudgeTimeLimit->setValidator(new QIntValidator(1, Settings::upperBoundForTimeLimit(), this));
     ui->fileSizeLimit->setValidator(new QIntValidator(1, Settings::upperBoundForFileSizeLimit(), this));
-    ui->numberOfThreads->setValidator(new QIntValidator(1, Settings::upperBoundForNumberOfThreads(), this));
     ui->rejudgeTimes->setValidator(new QIntValidator(0, Settings::upperBoundForRejudgeTimes(), this));
     ui->inputFileExtensions->setValidator(new QRegExpValidator(QRegExp("(\\w+;)*\\w+"), this));
     ui->outputFileExtensions->setValidator(new QRegExpValidator(QRegExp("(\\w+;)*\\w+"), this));
@@ -54,8 +53,6 @@ GeneralSettings::GeneralSettings(QWidget *parent) :
             this, SLOT(specialJudgeTimeLimitChanged(QString)));
     connect(ui->fileSizeLimit, SIGNAL(textChanged(QString)),
             this, SLOT(fileSizeLimitChanged(QString)));
-    connect(ui->numberOfThreads, SIGNAL(textChanged(QString)),
-            this, SLOT(numberOfThreadsChanged(QString)));
     connect(ui->rejudgeTimes, SIGNAL(textChanged(QString)),
             this, SLOT(rejudgeTimesChanged(QString)));
     connect(ui->inputFileExtensions, SIGNAL(textChanged(QString)),
@@ -79,7 +76,6 @@ void GeneralSettings::resetEditSettings(Settings *settings)
     ui->compileTimeLimit->setText(QString("%1").arg(editSettings->getCompileTimeLimit()));
     ui->specialJudgeTimeLimit->setText(QString("%1").arg(editSettings->getSpecialJudgeTimeLimit()));
     ui->fileSizeLimit->setText(QString("%1").arg(editSettings->getFileSizeLimit()));
-    ui->numberOfThreads->setText(QString("%1").arg(editSettings->getNumberOfThreads()));
     ui->rejudgeTimes->setText(QString("%1").arg(editSettings->getRejudgeTimes()));
     ui->inputFileExtensions->setText(editSettings->getInputFileExtensions().join(";"));
     ui->outputFileExtensions->setText(editSettings->getOutputFileExtensions().join(";"));
@@ -117,11 +113,6 @@ bool GeneralSettings::checkValid()
         QMessageBox::warning(this, tr("Error"), tr("Empty source file size limit!"), QMessageBox::Close);
         return false;
     }
-    if (ui->numberOfThreads->text().isEmpty()) {
-        ui->numberOfThreads->setFocus();
-        QMessageBox::warning(this, tr("Error"), tr("Empty number of threads!"), QMessageBox::Close);
-        return false;
-    }
     if(ui->rejudgeTimes->text().isEmpty()) {
         ui->rejudgeTimes->setFocus();
         QMessageBox::warning(this, tr("Error"), tr("Empty maximum rejudge times!"), QMessageBox::Close);
@@ -157,11 +148,6 @@ void GeneralSettings::specialJudgeTimeLimitChanged(const QString &text)
 void GeneralSettings::fileSizeLimitChanged(const QString &text)
 {
     editSettings->setFileSizeLimit(text.toInt());
-}
-
-void GeneralSettings::numberOfThreadsChanged(const QString &text)
-{
-    editSettings->setNumberOfThreads(text.toInt());
 }
 
 void GeneralSettings::rejudgeTimesChanged(const QString &text)

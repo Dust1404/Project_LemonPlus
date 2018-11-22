@@ -73,10 +73,11 @@ private slots:
     void viewerSelectionChanged();
     void contestantDeleted();
     void newAction();
+    void saveAction();
+    void openFolderAction();
     void closeAction();
     void loadAction();
     void addTasksAction();
-    void makeSelfTest();
     void exportResult();
     void aboutLemon();
     void setUiLanguage();

@@ -20,7 +20,7 @@
    <string>Lemon</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="resource.qrc">
+   <iconset resource="../resource.qrc">
     <normaloff>:/icon/icon.png</normaloff>:/icon/icon.png</iconset>
   </property>
   <widget class="QWidget" name="centralWidget">
@@ -235,6 +235,8 @@
     </property>
     <addaction name="newAction"/>
     <addaction name="openAction"/>
+    <addaction name="saveAction"/>
+    <addaction name="openFolderAction"/>
     <addaction name="closeAction"/>
     <addaction name="separator"/>
     <addaction name="exitAction"/>
@@ -247,7 +249,6 @@
     <addaction name="judgeAllAction"/>
     <addaction name="separator"/>
     <addaction name="addTasksAction"/>
-    <addaction name="makeSelfTestAction"/>
     <addaction name="exportAction"/>
    </widget>
    <widget class="QMenu" name="toolsMenu">
@@ -349,6 +350,16 @@
     <string>&amp;Export Result</string>
    </property>
   </action>
+  <action name="saveAction">
+   <property name="text">
+    <string>Save Current Contest</string>
+   </property>
+  </action>
+  <action name="openFolderAction">
+   <property name="text">
+    <string>Open Current Contest Folder</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <customwidgets>
@@ -384,7 +395,7 @@
   <tabstop>resultViewer</tabstop>
  </tabstops>
  <resources>
-  <include location="resource.qrc"/>
+  <include location="../resource.qrc"/>
  </resources>
  <connections/>
 </ui>

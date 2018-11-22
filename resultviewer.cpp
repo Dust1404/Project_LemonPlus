@@ -235,12 +235,13 @@ void ResultViewer::deleteContestant()
                                               QString("<span style=\"font-size:large\">")
                                               + tr("Are you sure to delete selected contestant(s)?") + "</span>",
                                               QMessageBox::Ok | QMessageBox::Cancel, this);
-    QHBoxLayout *layout = new QHBoxLayout;
+    //QHBoxLayout *layout = new QHBoxLayout;
     QCheckBox *checkBox = new QCheckBox(tr("Delete directories in the hard disk as well"));
-    layout->addWidget(checkBox);
-    layout->setAlignment(checkBox, Qt::AlignHCenter);
-    dynamic_cast<QGridLayout*>(messageBox->layout())->addLayout(layout, 1, 1);
-    dynamic_cast<QGridLayout*>(messageBox->layout())->setVerticalSpacing(10);
+    //layout->addWidget(checkBox);
+    //layout->setAlignment(checkBox, Qt::AlignHCenter);
+    //dynamic_cast<QGridLayout*>(messageBox->layout())->addLayout(layout, 1, 1);
+    //dynamic_cast<QGridLayout*>(messageBox->layout())->setVerticalSpacing(10);
+    messageBox->setCheckBox(checkBox);
     if (messageBox->exec() != QMessageBox::Ok) return;
     
     QList<QTableWidgetSelectionRange> selectionRange = selectedRanges();

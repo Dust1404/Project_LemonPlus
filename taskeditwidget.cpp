@@ -56,6 +56,8 @@ TaskEditWidget::TaskEditWidget(QWidget *parent) :
             this, SLOT(setToInteraction(bool)));
     connect(ui->sourceFileName, SIGNAL(textChanged(QString)),
             this, SLOT(sourceFileNameChanged(QString)));
+    connect(ui->subFolderCheck, SIGNAL(stateChanged(int)),
+            this, SLOT(subFolderCheckChanged()));
     connect(ui->inputFileName, SIGNAL(textChanged(QString)),
             this, SLOT(inputFileNameChanged(QString)));
     connect(ui->outputFileName, SIGNAL(textChanged(QString)),
@@ -115,6 +117,7 @@ void TaskEditWidget::setEditTask(Task *task)
     ui->sourceFileName->setEnabled(false);
     ui->sourceFileName->setText(editTask->getSourceFileName());
     ui->sourceFileName->setEnabled(true);
+    ui->subFolderCheck->setChecked(editTask->getSubFolderCheck());
     ui->inputFileName->setText(editTask->getInputFileName());
     ui->outputFileName->setText(editTask->getOutputFileName());
     ui->comparisonMode->setCurrentIndex(int(editTask->getComparisonMode()));
@@ -177,8 +180,8 @@ void TaskEditWidget::setToTraditional(bool check)
 {
     if (! check || ! editTask) return;
     editTask->setTaskType(Task::Traditional);
-    editTask->setStandardOutputCheck(false);
-    ui->standardOutputCheck->setCheckState(Qt::Unchecked);
+    //editTask->setStandardOutputCheck(false); //fix stdout not save
+    //ui->standardOutputCheck->setCheckState(Qt::Unchecked);
     refreshWidgetState();
 }
 
@@ -186,8 +189,8 @@ void TaskEditWidget::setToAnswersOnly(bool check)
 {
     if (! check || ! editTask) return;
     editTask->setTaskType(Task::AnswersOnly);
-    editTask->setStandardOutputCheck(false);
-    ui->standardOutputCheck->setCheckState(Qt::Unchecked);
+    //editTask->setStandardOutputCheck(false);
+    //ui->standardOutputCheck->setCheckState(Qt::Unchecked);
     refreshWidgetState();
 }
 
@@ -195,8 +198,8 @@ void TaskEditWidget::setToInteraction(bool check)
 {
     if(!check || !editTask) return;
     editTask->setTaskType(Task::Interaction);
-    editTask->setStandardOutputCheck(true);
-    ui->standardOutputCheck->setCheckState(Qt::Checked);
+    //editTask->setStandardOutputCheck(true);
+    //ui->standardOutputCheck->setCheckState(Qt::Checked);
     refreshWidgetState();
 }
 
@@ -211,6 +214,13 @@ void TaskEditWidget::sourceFileNameChanged(const QString &text)
     if (ui->outputFileName->isEnabled()) {
         ui->outputFileName->setText(text + "." + settings->getDefaultOutputFileExtension());
     }
+}
+
+void TaskEditWidget::subFolderCheckChanged()
+{
+    if(! editTask) return;
+    bool check = ui->subFolderCheck->isChecked();
+    editTask->setSubFolderCheck(check);
 }
 
 void TaskEditWidget::inputFileNameChanged(const QString &text)

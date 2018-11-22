@@ -53,6 +53,16 @@ const QStringList& TestCase::getOutputFiles() const
     return outputFiles;
 }
 
+const QList<int>& TestCase::getDependenceSubtask() const
+{
+    return dependenceSubtask;
+}
+
+void TestCase::setIndex(int ind)
+{
+    index = ind;
+}
+
 void TestCase::setFullScore(int score)
 {
     fullScore = score;
@@ -82,6 +92,25 @@ void TestCase::setOutputFiles(int index, const QString &fileName)
     }
 }
 
+void TestCase::setDependenceSubtask(const QStringList &list)
+{
+    dependenceSubtask.clear();
+    for(int i = 0; i != list.size(); ++i)
+        dependenceSubtask.push_back(list[i].toInt());
+}
+
+bool TestCase::checkDependenceSubtask(const QStringList &list)
+{
+    for(int i = 0; i != list.size(); ++i) {
+        int     t;
+        bool    flag;
+        t = list[i].toInt();
+        if(t <= 0 || t >= index)
+            return false;
+    }
+    return true;
+}
+
 void TestCase::addSingleCase(const QString &inputFile, const QString &outputFile)
 {
     inputFiles.append(inputFile);
@@ -103,6 +132,9 @@ void TestCase::writeToStream(QDataStream &out)
     for (int i = 0; i < _inputFiles.size(); i ++) {
         _inputFiles[i].replace(QDir::separator(), '/');
     }
+    for(int i = 0; i < dependenceSubtask.size(); ++i) {
+        _inputFiles.push_back(QString("%1_lemon_SUbtaskDEPENDENCE_fLAg").arg(dependenceSubtask[i]));
+    }
     QStringList _outputFiles(outputFiles);
     for (int i = 0; i < _outputFiles.size(); i ++) {
         _outputFiles[i].replace(QDir::separator(), '/');
@@ -116,12 +148,29 @@ void TestCase::readFromStream(QDataStream &in)
     in >> fullScore;
     in >> timeLimit;
     in >> memoryLimit;
-    in >> inputFiles;
+    QStringList _inputFiles;
+    in >> _inputFiles;
     in >> outputFiles;
-    for (int i = 0; i < inputFiles.size(); i ++) {
-        inputFiles[i].replace('/', QDir::separator());
+    inputFiles.clear();
+    dependenceSubtask.clear();
+    for (int i = 0; i < _inputFiles.size(); i ++) {
+        if(_inputFiles[i].endsWith("_lemon_SUbtaskDEPENDENCE_fLAg")) {
+            int temp(0);
+            for(QString::iterator itr = _inputFiles[i].begin(); *itr != '_'; ++itr)
+                (temp *= 10) += itr->toLatin1() ^ '0';
+            dependenceSubtask.push_back(temp);
+        }
+        else {
+            inputFiles.push_back(_inputFiles[i]);
+            inputFiles.back().replace('/', QDir::separator());
+        }
     }
     for (int i = 0; i < outputFiles.size(); i ++) {
         outputFiles[i].replace('/', QDir::separator());
     }
+}
+
+void TestCase::clearDependenceSubtask()
+{
+    dependenceSubtask.clear();
 }

@@ -58,11 +58,6 @@ int Settings::getFileSizeLimit() const
     return fileSizeLimit;
 }
 
-int Settings::getNumberOfThreads() const
-{
-    return numberOfThreads;
-}
-
 int Settings::getRejudgeTimes() const
 {
     return rejudgeTimes;
@@ -136,11 +131,6 @@ void Settings::setSpecialJudgeTimeLimit(int limit)
 void Settings::setFileSizeLimit(int limit)
 {
     fileSizeLimit = limit;
-}
-
-void Settings::setNumberOfThreads(int number)
-{
-    numberOfThreads = number;
 }
 
 void Settings::setRejudgeTimes(int number)
@@ -218,7 +208,6 @@ void Settings::copyFrom(Settings *other)
     setCompileTimeLimit(other->getCompileTimeLimit());
     setSpecialJudgeTimeLimit(other->getSpecialJudgeTimeLimit());
     setFileSizeLimit(other->getFileSizeLimit());
-    setNumberOfThreads(other->getNumberOfThreads());
     setRejudgeTimes(other->getRejudgeTimes());
     setDefaultInputFileExtension(other->getDefaultInputFileExtension());
     setDefaultOutputFileExtension(other->getDefaultOutputFileExtension());
@@ -250,7 +239,6 @@ void Settings::saveSettings()
     settings.setValue("CompileTimeLimit", compileTimeLimit);
     settings.setValue("SpecialJudgeTimeLimit", specialJudgeTimeLimit);
     settings.setValue("FileSizeLimit", fileSizeLimit);
-    settings.setValue("NumberOfThreads", numberOfThreads);
     settings.setValue("MaximumRejudgeTimes", rejudgeTimes);
     settings.setValue("DefaultInputFileExtension", defaultInputFileExtension);
     settings.setValue("DefaultOutputFileExtension", defaultOutputFileExtension);
@@ -311,7 +299,6 @@ void Settings::loadSettings()
     compileTimeLimit = settings.value("CompileTimeLimit", 10000).toInt();
     specialJudgeTimeLimit = settings.value("SpecialJudgeTimeLimit", 10000).toInt();
     fileSizeLimit = settings.value("FileSizeLimit", 50).toInt();
-    numberOfThreads = settings.value("NumberOfThreads", 1).toInt();
     rejudgeTimes = settings.value("MaximumRejudgeTimes", 2).toInt();
     defaultInputFileExtension = settings.value("DefaultInputFileExtension", "in").toString();
     defaultOutputFileExtension = settings.value("DefaultOuputFileExtension", "out").toString();
@@ -386,11 +373,6 @@ int Settings::upperBoundForMemoryLimit()
 int Settings::upperBoundForFileSizeLimit()
 {
     return 10 * 1024;
-}
-
-int Settings::upperBoundForNumberOfThreads()
-{
-    return 8;
 }
 
 int Settings::upperBoundForRejudgeTimes()

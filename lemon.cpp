@@ -35,7 +35,6 @@
 #include "welcomedialog.h"
 #include "addtaskdialog.h"
 #include "detaildialog.h"
-#include "selftestutil.h"
 #include "exportutil.h"
 #include <QMessageBox>
 
@@ -50,6 +49,8 @@ Lemon::Lemon(QWidget *parent) :
     
     ui->tabWidget->setVisible(false);
     ui->closeAction->setEnabled(false);
+    ui->saveAction->setEnabled(false);
+    ui->openFolderAction->setEnabled(false);
     
     dataDirWatcher = 0;
     settings->loadSettings();
@@ -87,12 +88,14 @@ Lemon::Lemon(QWidget *parent) :
             this, SLOT(newAction()));
     connect(ui->openAction, SIGNAL(triggered()),
             this, SLOT(loadAction()));
+    connect(ui->saveAction, SIGNAL(triggered()),
+            this, SLOT(saveAction()));
+    connect(ui->openFolderAction, SIGNAL(triggered()),
+            this, SLOT(openFolderAction()));
     connect(ui->closeAction, SIGNAL(triggered()),
             this, SLOT(closeAction()));
     connect(ui->addTasksAction, SIGNAL(triggered()),
             this, SLOT(addTasksAction()));
-    connect(ui->makeSelfTestAction, SIGNAL(triggered()),
-            this, SLOT(makeSelfTest()));
     connect(ui->exportAction, SIGNAL(triggered()),
             this, SLOT(exportResult()));
     connect(ui->aboutAction, SIGNAL(triggered()),
@@ -400,8 +403,9 @@ void Lemon::loadContest(const QString &filePath)
     ui->tabWidget->setVisible(true);
     resetDataWatcher();
     ui->closeAction->setEnabled(true);
+    ui->openFolderAction->setEnabled(true);
+    ui->saveAction->setEnabled(true);
     ui->addTasksAction->setEnabled(true);
-    ui->makeSelfTestAction->setEnabled(true);
     ui->exportAction->setEnabled(true);
     setWindowTitle(tr("Lemon - %1").arg(curContest->getContestTitle()));
     
@@ -433,8 +437,9 @@ void Lemon::newContest(const QString &title, const QString &savingName, const QS
     ui->tabWidget->setVisible(true);
     resetDataWatcher();
     ui->closeAction->setEnabled(true);
+    ui->openFolderAction->setEnabled(true);
+    ui->saveAction->setEnabled(true);
     ui->addTasksAction->setEnabled(true);
-    ui->makeSelfTestAction->setEnabled(true);
     ui->exportAction->setEnabled(true);
     QStringList recentContest = settings->getRecentContest();
     recentContest.append(QDir::toNativeSeparators((QDir().absoluteFilePath(curFile))));
@@ -462,10 +467,21 @@ void Lemon::closeAction()
     ui->tabWidget->setCurrentIndex(0);
     ui->tabWidget->setVisible(false);
     ui->closeAction->setEnabled(false);
+    ui->openFolderAction->setEnabled(false);
+    ui->saveAction->setEnabled(false);
     ui->addTasksAction->setEnabled(false);
-    ui->makeSelfTestAction->setEnabled(false);
     ui->exportAction->setEnabled(false);
     setWindowTitle(tr("Lemon"));
+}
+
+void Lemon::saveAction()
+{
+    saveContest(curFile);
+}
+
+void Lemon::openFolderAction()
+{
+    QDesktopServices::openUrl(QUrl::fromLocalFile(QDir::currentPath()));
 }
 
 void Lemon::loadAction()
@@ -593,11 +609,6 @@ void Lemon::addTasksAction()
     ui->summary->setContest(curContest);
 }
 
-void Lemon::makeSelfTest()
-{
-    SelfTestUtil::makeSelfTest(this, curContest);
-}
-
 void Lemon::exportResult()
 {
     ExportUtil::exportResult(this, curContest);
@@ -606,7 +617,7 @@ void Lemon::exportResult()
 void Lemon::aboutLemon()
 {
     QString text;
-    text += "<h2>Project Lemon+</h2>";
+    text += "<h2>Project LemonPlus</h2>";
     text += tr("A tiny judging environment for OI contest based on Project Lemon") + "<br>";
     text += tr("Based on Project Lemon version 1.2 Beta by Zhipeng Jia, 2011") + "<br>";
     text += tr("Build Date: %1").arg(__DATE__) + "<br>";
@@ -615,7 +626,7 @@ void Lemon::aboutLemon()
             + "<br>";
     text += tr("Update by Dust1404") + "</a><br>";
     text += QString("<a href=\"https://github.com/Dust1404/Project_LemonPlus\">") + tr("Github Page") + "</a>";
-    QMessageBox::about(this, tr("About Lemon+"), text);
+    QMessageBox::about(this, tr("About LemonPlus"), text);
 }
 
 void Lemon::setUiLanguage()

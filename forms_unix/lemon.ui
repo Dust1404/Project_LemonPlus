@@ -223,7 +223,7 @@
      <x>0</x>
      <y>0</y>
      <width>725</width>
-     <height>25</height>
+     <height>26</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -247,7 +247,6 @@
     <addaction name="judgeAllAction"/>
     <addaction name="separator"/>
     <addaction name="addTasksAction"/>
-    <addaction name="makeSelfTestAction"/>
     <addaction name="exportAction"/>
    </widget>
    <widget class="QMenu" name="toolsMenu">

@@ -76,7 +76,7 @@ private:
     QList<QStringList> message;
     QList<QStringList> inputFiles;
     //QList< QPair<int, int> > needRejudge;
-    QList<bool> isSkipped;
+    QList<int> testCaseScore;
     int curTestCaseIndex;
     int curSingleCaseIndex;
     int countFinished;
@@ -85,16 +85,17 @@ private:
     bool stopJudging;
     bool traditionalTaskPrepare();
     void assign();
+    void taskSkipped(const QPair<int, int>&);
 
 private slots:
     void threadFinished();
-    void taskSkipped(const QPair<int, int>&);
 
 public slots:
     void stopJudgingSlot();
 
 signals:
     void singleCaseFinished(int, int, int, int);
+    void singleSubtaskDependenceFinished(int, int, double);
     void compileError(int, int);
     void stopJudgingSignal();
 };

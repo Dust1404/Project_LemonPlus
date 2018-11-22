@@ -47,6 +47,8 @@ void JudgingDialog::setContest(Contest *contest)
     curContest = contest;
     connect(curContest, SIGNAL(singleCaseFinished(int, int, int, int)),
             this, SLOT(singleCaseFinished(int, int, int, int)));
+    connect(curContest, SIGNAL(singleSubtaskDependenceFinished(int, int, double)),
+            this, SLOT(singleSubtaskDependenceFinished(int, int, double)));
     connect(curContest, SIGNAL(taskJudgingStarted(QString)),
             this, SLOT(taskJudgingStarted(QString)));
     connect(curContest, SIGNAL(contestantJudgingStart(QString)),
@@ -154,6 +156,31 @@ void JudgingDialog::singleCaseFinished(int progress, int x, int y, int result)
     cursor->insertText(text, charFormat);
     ui->progressBar->setValue(ui->progressBar->value() + progress);
     
+    QScrollBar *bar = ui->logViewer->verticalScrollBar();
+    bar->setValue(bar->maximum());
+}
+
+void JudgingDialog::singleSubtaskDependenceFinished(int x, int y, double ratio)
+{
+    QTextBlockFormat blockFormat;
+    blockFormat.setLeftMargin(30);
+    cursor->insertBlock(blockFormat);
+    QTextCharFormat charFormat;
+    charFormat.setFontPointSize(9);
+    cursor->insertText(tr("Subtask Dependence %1.%2: ").arg(x + 1).arg(y + 1), charFormat);
+
+    QString text;
+    int     percentage = ratio * 10000;
+    text = QString("%1.%2%3").arg(percentage / 100).arg(percentage % 100).arg('%');
+    if(percentage == 10000)
+        charFormat.setForeground(QBrush(Qt::darkGreen));
+    else if(percentage == 0)
+        charFormat.setForeground(QBrush(Qt::red));
+    else
+        charFormat.setForeground(QBrush(Qt::darkYellow));
+
+    cursor->insertText(text, charFormat);
+
     QScrollBar *bar = ui->logViewer->verticalScrollBar();
     bar->setValue(bar->maximum());
 }

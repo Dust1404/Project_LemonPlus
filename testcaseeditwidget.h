@@ -45,7 +45,7 @@ public:
     explicit TestCaseEditWidget(QWidget *parent = 0);
     ~TestCaseEditWidget();
     void changeEvent(QEvent*);
-    void setEditTestCase(TestCase*, bool);
+    void setEditTestCase(TestCase*, bool, bool);
     void setSettings(Settings*);
 
 private:
@@ -61,6 +61,7 @@ private slots:
     void fullScoreChanged(const QString&);
     void timeLimitChanged(const QString&);
     void memoryLimitChanged(const QString&);
+    void subtaskDependenceChanged();
     void fileListSelectionChanged();
     void fileListItemChanged(QTableWidgetItem*);
 

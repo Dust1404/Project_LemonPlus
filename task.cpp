@@ -34,6 +34,7 @@ Task::Task(QObject *parent) :
     realPrecision = 3;
     standardInputCheck = false;
     standardOutputCheck = false;
+    subFolderCheck = false;
 }
 
 const QList<TestCase*>& Task::getTestCaseList() const
@@ -44,6 +45,11 @@ const QList<TestCase*>& Task::getTestCaseList() const
 const QString& Task::getProblemTile() const
 {
     return problemTitle;
+}
+
+bool Task::getSubFolderCheck() const
+{
+    return subFolderCheck;
 }
 
 const QString& Task::getSourceFileName() const
@@ -118,6 +124,11 @@ void Task::setProblemTitle(const QString &title)
     if (changed) emit problemTitleChanged(title);
 }
 
+void Task::setSubFolderCheck(bool check)
+{
+    subFolderCheck = check;
+}
+
 void Task::setSourceFileName(const QString &fileName)
 {
     sourceFileName = fileName;
@@ -186,6 +197,7 @@ void Task::setAnswerFileExtension(const QString &extension)
 void Task::addTestCase(TestCase *testCase)
 {
     testCase->setParent(this);
+    testCase->setIndex(testCaseList.size() + 1);
     testCaseList.append(testCase);
 }
 
@@ -201,6 +213,8 @@ TestCase* Task::getTestCase(int index) const
 void Task::deleteTestCase(int index)
 {
     if (0 <= index && index < testCaseList.size()) {
+        for(int i = index; i < testCaseList.size(); ++i)
+            testCaseList[i]->clearDependenceSubtask();
         delete testCaseList[index];
         testCaseList.removeAt(index);
     }
@@ -251,7 +265,7 @@ void Task::writeToStream(QDataStream &out)
     out << outputFileName;
     out << standardInputCheck;
     out << standardOutputCheck;
-    out << int(taskType);
+    out << (int(taskType) | (((int) subFolderCheck) << 8));
     out << int(comparisonMode);
     out << diffArguments;
     out << realPrecision;
@@ -276,7 +290,8 @@ void Task::readFromStream(QDataStream &in)
     in >> standardInputCheck;
     in >> standardOutputCheck;
     in >> tmp;
-    taskType = TaskType(tmp);
+    taskType = TaskType(tmp & 0xFF);
+    subFolderCheck = tmp >> 8;
     in >> tmp;
     comparisonMode = ComparisonMode(tmp);
     in >> diffArguments;
@@ -294,6 +309,7 @@ void Task::readFromStream(QDataStream &in)
     for (int i = 0; i < count; i ++) {
         TestCase *newTestCase = new TestCase(this);
         newTestCase->readFromStream(in);
+        newTestCase->setIndex(testCaseList.size() + 1);
         testCaseList.append(newTestCase);
     }
 }

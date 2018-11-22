@@ -57,6 +57,7 @@ private slots:
     void setToAnswersOnly(bool);
     void setToInteraction(bool);
     void sourceFileNameChanged(const QString&);
+    void subFolderCheckChanged();
     void inputFileNameChanged(const QString&);
     void outputFileNameChanged(const QString&);
     void standardInputCheckChanged();

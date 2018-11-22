@@ -69,7 +69,7 @@ void DetailDialog::refreshViewer(Contest *_contest, Contestant *_contestant)
             continue;
         }
         
-        if (taskList[i]->getTaskType() == Task::Traditional) {
+        if (taskList[i]->getTaskType() == Task::Traditional || taskList[i]->getTaskType() == Task::Interaction) {
             if (contestant->getCompileState(i) != CompileSuccessfully) {
                 switch (contestant->getCompileState(i)) {
                     case NoValidSourceFile:
@@ -114,8 +114,12 @@ void DetailDialog::refreshViewer(Contest *_contest, Contestant *_contestant)
             for (int k = 0; k < inputFiles[j].size(); k ++) {
                 htmlCode += "<tr>";
                 if (k == 0) {
-                    htmlCode += QString("<td nowrap=\"nowrap\" rowspan=\"%1\" align=\"center\" valign=\"middle\">#%2</td>")
-                                .arg(inputFiles[j].size()).arg(j + 1);
+                    if(score[j].size() == inputFiles[j].size())
+                        htmlCode += QString("<td nowrap=\"nowrap\" rowspan=\"%1\" align=\"center\" valign=\"middle\">#%2</td>")
+                                    .arg(inputFiles[j].size()).arg(j + 1);
+                    else
+                        htmlCode += QString("<td nowrap=\"nowrap\" rowspan=\"%1\" align=\"center\" valign=\"middle\">#%2<br>%3:<br>%4</td>")
+                                    .arg(inputFiles[j].size()).arg(j + 1).arg(tr("Subtask Dependence Score")).arg(score[j].back());
                 }
                 
                 htmlCode += QString("<td nowrap=\"nowrap\" align=\"center\">%1</td>").arg(inputFiles[j][k]);
@@ -157,6 +161,9 @@ void DetailDialog::refreshViewer(Contest *_contest, Contestant *_contestant)
                         break;
                     case Skipped:
                         text = tr("Skipped");
+                        break;
+                    case InteractorError:
+                        text = tr("Interactor Error");
                         break;
                 }
                 

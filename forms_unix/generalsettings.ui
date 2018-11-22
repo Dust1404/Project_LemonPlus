@@ -26,6 +26,38 @@
    <property name="verticalSpacing">
     <number>10</number>
    </property>
+   <item row="1" column="0">
+    <widget class="QLabel" name="label_2">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size:11pt;font-weight:bold;</string>
+     </property>
+     <property name="text">
+      <string>Default Time Limit</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="label">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size:11pt;font-weight:bold;</string>
+     </property>
+     <property name="text">
+      <string>Default Full Score</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <item>
@@ -64,54 +96,6 @@
       </spacer>
      </item>
     </layout>
-   </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="label">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size:11pt;font-weight:bold;</string>
-     </property>
-     <property name="text">
-      <string>Default Full Score</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="label_2">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size:11pt;font-weight:bold;</string>
-     </property>
-     <property name="text">
-      <string>Default Time Limit</string>
-     </property>
-    </widget>
-   </item>
-   <item row="2" column="0">
-    <widget class="QLabel" name="label_3">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size:11pt;font-weight:bold;</string>
-     </property>
-     <property name="text">
-      <string>Default Memory Limit</string>
-     </property>
-    </widget>
    </item>
    <item row="1" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_3">
@@ -171,10 +155,10 @@
      </item>
     </layout>
    </item>
-   <item row="3" column="0">
-    <widget class="QLabel" name="label_4">
+   <item row="2" column="0">
+    <widget class="QLabel" name="label_3">
      <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
        <horstretch>0</horstretch>
        <verstretch>0</verstretch>
       </sizepolicy>
@@ -183,7 +167,7 @@
       <string notr="true">font-size:11pt;font-weight:bold;</string>
      </property>
      <property name="text">
-      <string>Compile Time Limit</string>
+      <string>Default Memory Limit</string>
      </property>
     </widget>
    </item>
@@ -244,6 +228,22 @@
       </spacer>
      </item>
     </layout>
+   </item>
+   <item row="3" column="0">
+    <widget class="QLabel" name="label_4">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size:11pt;font-weight:bold;</string>
+     </property>
+     <property name="text">
+      <string>Compile Time Limit</string>
+     </property>
+    </widget>
    </item>
    <item row="3" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_5">
@@ -451,23 +451,7 @@
      </item>
     </layout>
    </item>
-   <item row="6" column="0">
-    <widget class="QLabel" name="label_19">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size:11pt;font-weight:bold;</string>
-     </property>
-     <property name="text">
-      <string>Number of Threads</string>
-     </property>
-    </widget>
-   </item>
-   <item row="8" column="0">
+   <item row="7" column="0">
     <widget class="QLabel" name="label_10">
      <property name="styleSheet">
       <string notr="true">font-size:11pt;font-weight:bold;</string>
@@ -477,43 +461,17 @@
      </property>
     </widget>
    </item>
-   <item row="6" column="1">
-    <layout class="QHBoxLayout" name="horizontalLayout_10">
-     <property name="spacing">
-      <number>12</number>
+   <item row="8" column="0">
+    <widget class="QLabel" name="label_12">
+     <property name="styleSheet">
+      <string notr="true">font-size:11pt;font-weight:bold;</string>
      </property>
-     <item>
-      <widget class="QLineEdit" name="numberOfThreads">
-       <property name="minimumSize">
-        <size>
-         <width>58</width>
-         <height>22</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>58</width>
-         <height>22</height>
-        </size>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <spacer name="horizontalSpacer_8">
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>201</width>
-         <height>20</height>
-        </size>
-       </property>
-      </spacer>
-     </item>
-    </layout>
+     <property name="text">
+      <string>Output File Extensions</string>
+     </property>
+    </widget>
    </item>
-   <item row="8" column="1">
+   <item row="7" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_7">
      <item>
       <widget class="QLineEdit" name="inputFileExtensions"/>
@@ -533,17 +491,7 @@
      </item>
     </layout>
    </item>
-   <item row="9" column="0">
-    <widget class="QLabel" name="label_12">
-     <property name="styleSheet">
-      <string notr="true">font-size:11pt;font-weight:bold;</string>
-     </property>
-     <property name="text">
-      <string>Output File Extensions</string>
-     </property>
-    </widget>
-   </item>
-   <item row="10" column="0" colspan="2">
+   <item row="9" column="0" colspan="2">
     <widget class="QLabel" name="label_11">
      <property name="styleSheet">
       <string notr="true">font-size:10pt;</string>
@@ -556,7 +504,21 @@
      </property>
     </widget>
    </item>
-   <item row="9" column="1">
+   <item row="6" column="0">
+    <widget class="QLabel" name="label_13">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Maximum Rejudge Times</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <item>
       <widget class="QLineEdit" name="outputFileExtensions"/>
@@ -576,7 +538,7 @@
      </item>
     </layout>
    </item>
-   <item row="7" column="1">
+   <item row="6" column="1">
     <layout class="QHBoxLayout" name="horizontalLayout_8">
      <item>
       <widget class="QLineEdit" name="rejudgeTimes">
@@ -608,20 +570,6 @@
       </spacer>
      </item>
     </layout>
-   </item>
-   <item row="7" column="0">
-    <widget class="QLabel" name="label_13">
-     <property name="font">
-      <font>
-       <pointsize>11</pointsize>
-       <weight>75</weight>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Maximum Rejudge Times</string>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

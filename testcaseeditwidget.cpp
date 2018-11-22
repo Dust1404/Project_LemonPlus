@@ -39,7 +39,11 @@ TestCaseEditWidget::TestCaseEditWidget(QWidget *parent) :
     deleteAction->setShortcut(QKeySequence::Delete);
     deleteAction->setEnabled(false);
     ui->fileList->addAction(deleteAction);
-    
+
+    QRegExp regx("[0-9,]+$");
+    QValidator *subtaskDependenceValidator = new QRegExpValidator(regx, ui->subtaskDependecne);
+    ui->subtaskDependecne->setValidator(subtaskDependenceValidator);
+
     ui->fullScore->setValidator(new QIntValidator(1, Settings::upperBoundForFullScore(), this));
     ui->timeLimit->setValidator(new QIntValidator(1, Settings::upperBoundForTimeLimit(), this));
     ui->memoryLimit->setValidator(new QIntValidator(1, Settings::upperBoundForMemoryLimit(), this));
@@ -62,6 +66,8 @@ TestCaseEditWidget::TestCaseEditWidget(QWidget *parent) :
             this, SLOT(timeLimitChanged(QString)));
     connect(ui->memoryLimit, SIGNAL(textChanged(QString)),
             this, SLOT(memoryLimitChanged(QString)));
+    connect(ui->subtaskDependenceButton, SIGNAL(clicked()),
+            this, SLOT(subtaskDependenceChanged()));
     connect(ui->fileList, SIGNAL(itemSelectionChanged()),
             this, SLOT(fileListSelectionChanged()));
     connect(ui->fileList, SIGNAL(itemChanged(QTableWidgetItem*)),
@@ -77,9 +83,9 @@ void TestCaseEditWidget::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange) {
         TestCase *bak = editTestCase;
-        setEditTestCase(0, true);
+        setEditTestCase(0, true, false);
         ui->retranslateUi(this);
-        setEditTestCase(bak, true);
+        setEditTestCase(bak, true, false);
     }
 }
 
@@ -98,7 +104,7 @@ void TestCaseEditWidget::refreshFileList()
     }
 }
 
-void TestCaseEditWidget::setEditTestCase(TestCase *testCase, bool check)
+void TestCaseEditWidget::setEditTestCase(TestCase *testCase, bool check, bool check2)
 {
     editTestCase = testCase;
     if (! editTestCase) return;
@@ -106,12 +112,18 @@ void TestCaseEditWidget::setEditTestCase(TestCase *testCase, bool check)
     ui->timeLimit->setText(QString("%1").arg(editTestCase->getTimeLimit()));
     ui->memoryLimit->setText(QString("%1").arg(editTestCase->getMemoryLimit()));
     refreshFileList();
+    QStringList temp;
+    const QList<int>& dependenceSubtask = editTestCase->getDependenceSubtask();
+    for(int i = 0; i != dependenceSubtask.size(); ++i)
+        temp.push_back(QString("%1").arg(dependenceSubtask[i]));
+    ui->subtaskDependecne->setText(temp.join(','));
     ui->timeLimit->setEnabled(check);
     ui->timeLimitLabel->setEnabled(check);
     ui->msLabel->setEnabled(check);
     ui->memoryLimit->setEnabled(check);
     ui->memoryLimitLabel->setEnabled(check);
     ui->mbLabel->setEnabled(check);
+    ui->outputFileEdit->setDisabled(check2);
 }
 
 void TestCaseEditWidget::setSettings(Settings *_settings)
@@ -129,7 +141,7 @@ void TestCaseEditWidget::addSingleCase()
         return;
     }
     
-    if (ui->outputFileEdit->text().isEmpty()) {
+    if (ui->outputFileEdit->text().isEmpty() && ui->outputFileEdit->isEnabled()) {
         ui->outputFileEdit->setFocus();
         QMessageBox::warning(this, tr("Error"), tr("Empty output file name!"), QMessageBox::Close);
         return;
@@ -143,6 +155,7 @@ void TestCaseEditWidget::addSingleCase()
                           new QTableWidgetItem(ui->outputFileEdit->text()));
     ui->inputFileEdit->clear();
     ui->outputFileEdit->clear();
+    ui->subtaskDependecne->clear();
 }
 
 void TestCaseEditWidget::deleteSingleCase()
@@ -174,6 +187,20 @@ void TestCaseEditWidget::fileListItemChanged(QTableWidgetItem *item)
         } else {
             editTestCase->setOutputFiles(item->row(), item->text());
         }
+    }
+}
+
+void TestCaseEditWidget::subtaskDependenceChanged()
+{
+    const QString& text = ui->subtaskDependecne->text();
+    if(! editTestCase) return;
+    QStringList list = text.isEmpty() ? QStringList() : text.split(',');
+    if(editTestCase->checkDependenceSubtask(list))
+        editTestCase->setDependenceSubtask(list);
+    else {
+        ui->subtaskDependecne->setFocus();
+        //ui->subtaskDependecne->set
+        QMessageBox::warning(this, tr("Error"), tr("Dependence subtask index error!"), QMessageBox::Close);
     }
 }
 

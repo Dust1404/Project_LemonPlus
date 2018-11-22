@@ -91,6 +91,7 @@ private:
     void judgeOutput();
     void judgeTraditionalTask();
     void judgeAnswersOnlyTask();
+    void judgeInteractionTask();
 
 public slots:
     void stopJudgingSlot();

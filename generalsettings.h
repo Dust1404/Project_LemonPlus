@@ -54,7 +54,6 @@ private slots:
     void compileTimeLimitChanged(const QString&);
     void specialJudgeTimeLimitChanged(const QString&);
     void fileSizeLimitChanged(const QString&);
-    void numberOfThreadsChanged(const QString&);
     void rejudgeTimesChanged(const QString&);
     void inputFileExtensionsChanged(const QString&);
     void outputFileExtensionsChanged(const QString&);

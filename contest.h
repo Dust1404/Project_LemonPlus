@@ -75,6 +75,7 @@ signals:
     void taskDeletedForViewer(int);
     void problemTitleChanged();
     void singleCaseFinished(int, int, int, int);
+    void singleSubtaskDependenceFinished(int, int, double);
     void taskJudgingStarted(QString);
     void taskJudgingFinished();
     void contestantJudgingStart(QString);

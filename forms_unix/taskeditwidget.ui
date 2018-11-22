@@ -65,9 +65,6 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1" colspan="2">
-    <widget class="QLineEdit" name="sourceFileName"/>
-   </item>
    <item row="1" column="1" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
      <property name="spacing">
@@ -493,6 +490,21 @@
      </property>
      <property name="text">
       <string>Interactor Path</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="sourceFileName"/>
+   </item>
+   <item row="2" column="2">
+    <widget class="QCheckBox" name="subFolderCheck">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+      </font>
+     </property>
+     <property name="text">
+      <string>Subfolder</string>
      </property>
     </widget>
    </item>

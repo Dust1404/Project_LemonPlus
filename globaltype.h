@@ -30,6 +30,6 @@ enum ResultState { CorrectAnswer, WrongAnswer, PartlyCorrect,
                    TimeLimitExceeded, MemoryLimitExceeded,
                    CannotStartProgram, FileError, RunTimeError,
                    InvalidSpecialJudge, SpecialJudgeTimeLimitExceeded,
-                   SpecialJudgeRunTimeError, Skipped };
+                   SpecialJudgeRunTimeError, Skipped, InteractorError };
 
 #endif // GLOBALTYPE_H

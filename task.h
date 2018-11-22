@@ -40,6 +40,7 @@ public:
     
     const QList<TestCase*>& getTestCaseList() const;
     const QString& getProblemTile() const;
+    bool getSubFolderCheck() const;
     const QString& getSourceFileName() const;
     const QString& getInputFileName() const;
     const QString& getOutputFileName() const;
@@ -55,6 +56,7 @@ public:
     const QString& getAnswerFileExtension() const;
     
     void setProblemTitle(const QString&);
+    void setSubFolderCheck(bool);
     void setSourceFileName(const QString&);
     void setInputFileName(const QString&);
     void setOutputFileName(const QString&);
@@ -80,6 +82,7 @@ public:
 private:
     QList<TestCase*> testCaseList;
     QString problemTitle;
+    bool subFolderCheck;
     QString sourceFileName;
     QString inputFileName;
     QString outputFileName;

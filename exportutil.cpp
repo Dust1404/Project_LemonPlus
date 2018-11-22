@@ -48,7 +48,7 @@ QString ExportUtil::getContestantHtmlCode(Contest *contest, Contestant *contesta
             continue;
         }
         
-        if (taskList[i]->getTaskType() == Task::Traditional) {
+        if (taskList[i]->getTaskType() == Task::Traditional || taskList[i]->getTaskType() == Task::Interaction) {
             if (contestant->getCompileState(i) != CompileSuccessfully) {
                 switch (contestant->getCompileState(i)) {
                     case NoValidSourceFile:
@@ -105,8 +105,12 @@ QString ExportUtil::getContestantHtmlCode(Contest *contest, Contestant *contesta
             for (int k = 0; k < inputFiles[j].size(); k ++) {
                 htmlCode += "<tr>";
                 if (k == 0) {
-                    htmlCode += QString("<td nowrap=\"nowrap\" rowspan=\"%1\" align=\"center\" valign=\"middle\">#%2</td>")
-                                .arg(inputFiles[j].size()).arg(j + 1);
+                    if(score[j].size() == inputFiles[j].size())
+                        htmlCode += QString("<td nowrap=\"nowrap\" rowspan=\"%1\" align=\"center\" valign=\"middle\">#%2</td>")
+                                    .arg(inputFiles[j].size()).arg(j + 1);
+                    else
+                        htmlCode += QString("<td nowrap=\"nowrap\" rowspan=\"%1\" align=\"center\" valign=\"middle\">#%2<br>%3:<br>%4</td>")
+                                    .arg(inputFiles[j].size()).arg(j + 1).arg(tr("Subtask Dependence Score")).arg(score[j].back());
                 }
                 
                 htmlCode += QString("<td nowrap=\"nowrap\" align=\"center\">%1</td>").arg(inputFiles[j][k]);
@@ -148,6 +152,9 @@ QString ExportUtil::getContestantHtmlCode(Contest *contest, Contestant *contesta
                         break;
                     case Skipped:
                         text = tr("Skipped");
+                        break;
+                    case InteractorError:
+                        text = tr("Interactor Error");
                         break;
                 }
                 
@@ -273,7 +280,10 @@ void ExportUtil::exportHtml(QWidget *widget, Contest *contest, const QString &fi
         }
     }
     out << "</table></p>";
-    
+    //out << "<p>" << tr("Judge with LemonPlus") << "</p>";
+    //out << "<p>" << tr("Github Page: ") << QString("<a href=\"https://github.com/Dust1404/Project_LemonPlus\">https://github.com/Dust1404/Project_LemonPlus</a>") << "</p>";
+    //remove project info in result.html
+
     for (int i = 0; i < contestantList.size(); i ++) {
         out << QString("<a name=\"c%1\"><hr><a>").arg(i) << "<span style=\"font-size:x-large; font-weight:bold;\">";
         out << tr("Contestant: %1").arg(contestantList[i]->getContestantName()) << "</span>";

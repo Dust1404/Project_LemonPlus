@@ -40,7 +40,6 @@ public:
     int getCompileTimeLimit() const;
     int getSpecialJudgeTimeLimit() const;
     int getFileSizeLimit() const;
-    int getNumberOfThreads() const;
     int getRejudgeTimes() const;
     const QString& getDefaultInputFileExtension() const;
     const QString& getDefaultOutputFileExtension() const;
@@ -57,7 +56,6 @@ public:
     void setCompileTimeLimit(int);
     void setSpecialJudgeTimeLimit(int);
     void setFileSizeLimit(int);
-    void setNumberOfThreads(int);
     void setRejudgeTimes(int);
     void setDefaultInputFileExtension(const QString&);
     void setDefaultOutputFileExtension(const QString&);
@@ -78,7 +76,6 @@ public:
     static int upperBoundForTimeLimit();
     static int upperBoundForMemoryLimit();
     static int upperBoundForFileSizeLimit();
-    static int upperBoundForNumberOfThreads();
     static int upperBoundForRejudgeTimes();
     static QString dataPath();
     static QString sourcePath();
@@ -93,7 +90,6 @@ private:
     int compileTimeLimit;
     int specialJudgeTimeLimit;
     int fileSizeLimit;
-    int numberOfThreads;
     int rejudgeTimes;
     QString defaultInputFileExtension;
     QString defaultOutputFileExtension;
