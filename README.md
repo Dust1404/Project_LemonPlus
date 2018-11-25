@@ -54,13 +54,28 @@ Based on Lemon, More than Lemon.
 sudo apt-get install g++ gcc qt5-default make
 ```
 
-下载源代码，在源代码目录中执行：
+下载源代码，在源代码目录中依次执行：
 
 ```bash
 gcc watcher_unix.c -o watcher_unix -O2
-gcc realjudge.c -o reajudge_linux -O2
+```
+
+编译 `watcher_unix.c`
+
+```bash
+gcc realjudge.c -o realjudge_linux -O2
+```
+编译 `realjudge.c`
+
+```bash
 qmake lemon.pro
+```
+生成 `MAKEFILE` 文件
+
+```bash
 make
 ```
+
+构建 lemon 项目。
 
 随后使用 `./lemon` 即可运行（某些版本也可以双击运行）。
