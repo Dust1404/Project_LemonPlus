@@ -118,11 +118,11 @@ void DetailDialog::refreshViewer(Contest *_contest, Contestant *_contestant)
                         htmlCode += QString("<td nowrap=\"nowrap\" rowspan=\"%1\" align=\"center\" valign=\"middle\">#%2</td>")
                                     .arg(inputFiles[j].size()).arg(j + 1);
                     else
-                        htmlCode += QString("<td nowrap=\"nowrap\" rowspan=\"%1\" align=\"center\" valign=\"middle\">#%2<br>%3:<br>%4</td>")
+                        htmlCode += QString("<td nowrap=\"nowrap\" rowspan=\"%1\" align=\"center\" valign=\"middle\">#%2<br>%3:%4</td>")
                                     .arg(inputFiles[j].size()).arg(j + 1).arg(tr("Subtask Dependence Score")).arg(score[j].back());
                 }
                 
-                htmlCode += QString("<td nowrap=\"nowrap\" align=\"center\">%1</td>").arg(inputFiles[j][k]);
+                htmlCode += QString("<td nowrap=\"nowrap\" align=\"center\" valign=\"middle\">%1</td>").arg(inputFiles[j][k]);
                 
                 QString text;
                 switch (result[j][k]) {
@@ -167,13 +167,13 @@ void DetailDialog::refreshViewer(Contest *_contest, Contestant *_contestant)
                         break;
                 }
                 
-                htmlCode += QString("<td align=\"center\">%1").arg(text);
+                htmlCode += QString("<td align=\"center\" valign=\"middle\">%1").arg(text);
                 if (! message[j][k].isEmpty()) {
                     htmlCode += QString("<a href=\"Message %1 %2 %3\" style=\"text-decoration: none\"> (...)</a>").arg(i).arg(j).arg(k);
                 }
                 htmlCode += "</td>";
                 
-                htmlCode += "<td nowrap=\"nowrap\" align=\"center\">";
+                htmlCode += "<td nowrap=\"nowrap\" align=\"center\" valign=\"middle\">";
                 if (timeUsed[j][k] != -1) {
                     htmlCode += QString("").sprintf("%.3lf s", double(timeUsed[j][k]) / 1000);
                 } else {
@@ -181,7 +181,7 @@ void DetailDialog::refreshViewer(Contest *_contest, Contestant *_contestant)
                 }
                 htmlCode += "</td>";
                 
-                htmlCode += "<td nowrap=\"nowrap\" align=\"center\">";
+                htmlCode += "<td nowrap=\"nowrap\" align=\"center\" valign=\"middle\">";
                 if (memoryUsed[j][k] != -1) {
                     htmlCode += QString("").sprintf("%.3lf MB", double(memoryUsed[j][k]) / 1024 / 1024);
                 } else {

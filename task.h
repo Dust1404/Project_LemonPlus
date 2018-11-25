@@ -52,6 +52,8 @@ public:
     int getRealPrecision() const;
     const QString& getSpecialJudge() const;
     const QString& getInteractor() const;
+    const QString& getInteractorName() const;
+    const QString& getGrader() const;
     QString getCompilerConfiguration(const QString&) const;
     const QString& getAnswerFileExtension() const;
     
@@ -68,6 +70,8 @@ public:
     void setRealPrecision(int);
     void setSpecialJudge(const QString&);
     void setInteractor(const QString&);
+    void setInteractorName(const QString&);
+    void setGrader(const QString&);
     void setCompilerConfiguration(const QString&, const QString&);
     void setAnswerFileExtension(const QString&);
     
@@ -94,6 +98,8 @@ private:
     int realPrecision;
     QString specialJudge;
     QString interactor;
+    QString interactorName;
+    QString grader;
     QMap<QString, QString> compilerConfiguration;
     QString answerFileExtension;
 

@@ -67,6 +67,9 @@ private slots:
     void selectionChanged();
     void itemChanged(QTreeWidgetItem*);
     void titleChanged(const QString&);
+
+signals:
+    void taskChanged();
 };
 
 #endif // SUMMARYTREE_H

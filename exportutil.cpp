@@ -109,7 +109,7 @@ QString ExportUtil::getContestantHtmlCode(Contest *contest, Contestant *contesta
                         htmlCode += QString("<td nowrap=\"nowrap\" rowspan=\"%1\" align=\"center\" valign=\"middle\">#%2</td>")
                                     .arg(inputFiles[j].size()).arg(j + 1);
                     else
-                        htmlCode += QString("<td nowrap=\"nowrap\" rowspan=\"%1\" align=\"center\" valign=\"middle\">#%2<br>%3:<br>%4</td>")
+                        htmlCode += QString("<td nowrap=\"nowrap\" rowspan=\"%1\" align=\"center\" valign=\"middle\">#%2<br>%3:%4</td>")
                                     .arg(inputFiles[j].size()).arg(j + 1).arg(tr("Subtask Dependence Score")).arg(score[j].back());
                 }
                 

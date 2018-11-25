@@ -62,7 +62,7 @@ AddTestCasesWizard::~AddTestCasesWizard()
     delete ui;
 }
 
-void AddTestCasesWizard::setSettings(Settings *_settings, bool check, bool interactorCheck)
+void AddTestCasesWizard::setSettings(Settings *_settings, bool check)
 {
     settings = _settings;
     ui->fullScore->setText(QString("%1").arg(settings->getDefaultFullScore()));
@@ -74,8 +74,8 @@ void AddTestCasesWizard::setSettings(Settings *_settings, bool check, bool inter
     ui->memoryLimit->setEnabled(check);
     ui->memoryLimitLabel->setEnabled(check);
     ui->mbLabel->setEnabled(check);
-    ui->outputFilesPattern->setDisabled(interactorCheck);
-    ui->outputFilesPatternLabel->setDisabled(interactorCheck);
+    //ui->outputFilesPattern->setDisabled(interactorCheck);
+    //ui->outputFilesPatternLabel->setDisabled(interactorCheck);
     refreshButtonState();
 }
 
@@ -268,7 +268,7 @@ void AddTestCasesWizard::searchMatchedFiles()
     QMap<QString, int> loc;
     QList< QPair<QString, QString> > singleCases;
     QList< QStringList > matchedPart;
-    if(ui->outputFilesPattern->isEnabled()) {
+    //if(ui->outputFilesPattern->isEnabled()) {
         for (int i = 0; i < inputFiles.size(); i ++) {
             loc[inputFilesMatchedPart[i].join("*")] = i;
         }
@@ -279,12 +279,12 @@ void AddTestCasesWizard::searchMatchedFiles()
                 matchedPart.append(outputFilesMatchedPart[i]);
             }
         }
-    } else {
+    /*} else {
         for (int i = 0; i < inputFiles.size(); i ++) {
                 singleCases.append(qMakePair(inputFiles[i], QString("")));
                 matchedPart.append(inputFilesMatchedPart[i]);
         }
-    }
+    }*/
     
     loc.clear();
     for (int i = 0; i < singleCases.size(); i ++) {
@@ -351,7 +351,7 @@ bool AddTestCasesWizard::validateCurrentPage()
             QMessageBox::warning(this, tr("Error"), tr("Empty input files pattern!"), QMessageBox::Close);
             return false;
         }
-        if (ui->outputFilesPattern->text().isEmpty() && ui->outputFilesPattern->isEnabled()) {
+        if (ui->outputFilesPattern->text().isEmpty()) {
             ui->outputFilesPattern->setFocus();
             QMessageBox::warning(this, tr("Error"), tr("Empty output files pattern!"), QMessageBox::Close);
             return false;

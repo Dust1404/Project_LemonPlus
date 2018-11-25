@@ -55,6 +55,9 @@ private:
     QList<QAction*> languageActions;
     QTranslator *appTranslator;
     QTranslator *qtTranslator;
+    QSignalMapper *signalMapper;
+    QMenu *TaskMenu;
+    QList<QAction *> TaskList;
     void loadUiLanguage();
     void insertWatchPath(const QString&, QFileSystemWatcher*);
     void newContest(const QString&, const QString&, const QString&);
@@ -81,6 +84,7 @@ private slots:
     void exportResult();
     void aboutLemon();
     void setUiLanguage();
+    void refreshTaskList();
 
 signals:
     void dataPathChanged();

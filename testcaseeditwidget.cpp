@@ -55,7 +55,9 @@ TestCaseEditWidget::TestCaseEditWidget(QWidget *parent) :
             ui->inputFileEdit, SLOT(refreshFileList()));
     connect(this, SIGNAL(dataPathChanged()),
             ui->outputFileEdit, SLOT(refreshFileList()));
-    
+    connect(ui->subtaskDependecne, SIGNAL(editingFinished()),
+            this, SLOT(subtaskDependenceChanged())); //auto save subtaskDependence
+
     connect(ui->addButton, SIGNAL(clicked()),
             this, SLOT(addSingleCase()));
     connect(deleteAction, SIGNAL(triggered()),
@@ -66,8 +68,8 @@ TestCaseEditWidget::TestCaseEditWidget(QWidget *parent) :
             this, SLOT(timeLimitChanged(QString)));
     connect(ui->memoryLimit, SIGNAL(textChanged(QString)),
             this, SLOT(memoryLimitChanged(QString)));
-    connect(ui->subtaskDependenceButton, SIGNAL(clicked()),
-            this, SLOT(subtaskDependenceChanged()));
+    connect(ui->subtaskDependenceClearButton, SIGNAL(clicked()),
+            this, SLOT(subtaskDependenceClear()));
     connect(ui->fileList, SIGNAL(itemSelectionChanged()),
             this, SLOT(fileListSelectionChanged()));
     connect(ui->fileList, SIGNAL(itemChanged(QTableWidgetItem*)),
@@ -83,9 +85,9 @@ void TestCaseEditWidget::changeEvent(QEvent *event)
 {
     if (event->type() == QEvent::LanguageChange) {
         TestCase *bak = editTestCase;
-        setEditTestCase(0, true, false);
+        setEditTestCase(0, true);
         ui->retranslateUi(this);
-        setEditTestCase(bak, true, false);
+        setEditTestCase(bak, true);
     }
 }
 
@@ -104,7 +106,7 @@ void TestCaseEditWidget::refreshFileList()
     }
 }
 
-void TestCaseEditWidget::setEditTestCase(TestCase *testCase, bool check, bool check2)
+void TestCaseEditWidget::setEditTestCase(TestCase *testCase, bool check)
 {
     editTestCase = testCase;
     if (! editTestCase) return;
@@ -123,7 +125,7 @@ void TestCaseEditWidget::setEditTestCase(TestCase *testCase, bool check, bool ch
     ui->memoryLimit->setEnabled(check);
     ui->memoryLimitLabel->setEnabled(check);
     ui->mbLabel->setEnabled(check);
-    ui->outputFileEdit->setDisabled(check2);
+    //ui->outputFileEdit->setDisabled(check2);
 }
 
 void TestCaseEditWidget::setSettings(Settings *_settings)
@@ -141,7 +143,7 @@ void TestCaseEditWidget::addSingleCase()
         return;
     }
     
-    if (ui->outputFileEdit->text().isEmpty() && ui->outputFileEdit->isEnabled()) {
+    if (ui->outputFileEdit->text().isEmpty()) {
         ui->outputFileEdit->setFocus();
         QMessageBox::warning(this, tr("Error"), tr("Empty output file name!"), QMessageBox::Close);
         return;
@@ -196,12 +198,23 @@ void TestCaseEditWidget::subtaskDependenceChanged()
     if(! editTestCase) return;
     QStringList list = text.isEmpty() ? QStringList() : text.split(',');
     if(editTestCase->checkDependenceSubtask(list))
+    {
+        //QMessageBox::information(this, tr("Information"), tr("Finished!"), QMessageBox::Close);
         editTestCase->setDependenceSubtask(list);
+    }
     else {
         ui->subtaskDependecne->setFocus();
         //ui->subtaskDependecne->set
         QMessageBox::warning(this, tr("Error"), tr("Dependence subtask index error!"), QMessageBox::Close);
     }
+}
+
+void TestCaseEditWidget::subtaskDependenceClear()
+{
+    ui->subtaskDependecne->clear();
+    if (!editTestCase)
+        return;
+    editTestCase->clearDependenceSubtask();
 }
 
 void TestCaseEditWidget::fullScoreChanged(const QString &text)

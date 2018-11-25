@@ -213,7 +213,7 @@
          <number>1</number>
         </property>
         <property name="minimum">
-         <double>1.000000000000000</double>
+         <double>0.100000000000000</double>
         </property>
         <property name="singleStep">
          <double>0.100000000000000</double>
@@ -249,7 +249,7 @@
          <number>1</number>
         </property>
         <property name="minimum">
-         <double>1.000000000000000</double>
+         <double>0.100000000000000</double>
         </property>
         <property name="singleStep">
          <double>0.100000000000000</double>
@@ -328,7 +328,7 @@
          <string>...</string>
         </property>
         <property name="icon">
-         <iconset resource="resource.qrc">
+         <iconset resource="../resource.qrc">
           <normaloff>:/icon/cross.png</normaloff>:/icon/cross.png</iconset>
         </property>
        </widget>
@@ -414,7 +414,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="resource.qrc"/>
+  <include location="../resource.qrc"/>
  </resources>
  <connections>
   <connection>

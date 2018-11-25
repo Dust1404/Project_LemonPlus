@@ -400,6 +400,17 @@ void Contest::judgeAll()
     }
 }
 
+void Contest::judgeSingleTask(int taskID)
+{
+    clearPath(Settings::temporaryPath());
+    stopJudging = false;
+    QList<Contestant*> contestants = contestantList.values();
+    for (int i = 0; i < contestants.size(); i ++) {
+        judge(contestants[i], taskID);
+        if (stopJudging) break;
+    }
+}
+
 void Contest::stopJudgingSlot()
 {
     stopJudging = true;

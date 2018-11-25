@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>576</width>
+    <width>577</width>
     <height>438</height>
    </rect>
   </property>
@@ -14,6 +14,20 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
+   <item row="8" column="0">
+    <widget class="QLabel" name="interactorNameLabel">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Interactor Name</string>
+     </property>
+    </widget>
+   </item>
    <item row="0" column="0">
     <widget class="QLabel" name="problemTitleLabel">
      <property name="sizePolicy">
@@ -223,7 +237,7 @@
      </item>
     </widget>
    </item>
-   <item row="8" column="0">
+   <item row="10" column="0">
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
       <widget class="QLabel" name="compilerSettingsLabel">
@@ -372,7 +386,7 @@
      </widget>
     </widget>
    </item>
-   <item row="8" column="1" colspan="2">
+   <item row="10" column="1" colspan="2">
     <layout class="QVBoxLayout" name="verticalLayout_4">
      <property name="spacing">
       <number>12</number>
@@ -418,7 +432,7 @@
      </item>
     </layout>
    </item>
-   <item row="9" column="0" colspan="3">
+   <item row="11" column="0" colspan="3">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="spacing">
       <number>10</number>
@@ -507,6 +521,26 @@
       <string>Subfolder</string>
      </property>
     </widget>
+   </item>
+   <item row="9" column="0">
+    <widget class="QLabel" name="graderPathLabel">
+     <property name="font">
+      <font>
+       <pointsize>11</pointsize>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Grader Path</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1" colspan="2">
+    <widget class="QLineEdit" name="interactorName"/>
+   </item>
+   <item row="9" column="1" colspan="2">
+    <widget class="FileLineEdit" name="graderPath"/>
    </item>
   </layout>
  </widget>

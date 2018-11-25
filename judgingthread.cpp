@@ -715,7 +715,7 @@ void JudgingThread::runProgram()
         }
         if (memoryLimit != -1) {
             GetProcessMemoryInfo(pi.hProcess, (PROCESS_MEMORY_COUNTERS*)&info, sizeof(info));
-            if (qMax(info.PrivateUsage, info.PeakWorkingSetSize) > memoryLimit * 1024 * 1024) {
+            if (qMax(info.PrivateUsage, info.PeakWorkingSetSize) > memoryLimit * 1024U * 1024) {
                 TerminateProcess(pi.hProcess, 0);
                 if (task->getStandardInputCheck()) CloseHandle(si.hStdInput);
                 if (task->getStandardOutputCheck()) CloseHandle(si.hStdOutput);
@@ -1007,7 +1007,7 @@ void JudgingThread::judgeAnswersOnlyTask()
             break;
     }
 }
-
+/*
 void JudgingThread::judgeInteractionTask()
 {
     if (! QFileInfo(inputFile).exists()) {
@@ -1109,20 +1109,20 @@ void JudgingThread::judgeInteractionTask()
         QFile::remove(workingDirectory + "_tmpout");
     }
 }
+*/
+//rebuild interaction task, built in tradtional task
 
 void JudgingThread::run()
 {
     ++judgedTimes;
     needRejudge = false;
     switch (task->getTaskType()) {
+        case Task::Interaction:
         case Task::Traditional:
             judgeTraditionalTask();
             break;
         case Task::AnswersOnly:
             judgeAnswersOnlyTask();
-            break;
-        case Task::Interaction:
-            judgeInteractionTask();
             break;
     }
 }

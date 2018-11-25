@@ -42,6 +42,7 @@ public slots:
     void refreshViewer();
     void judgeSelected();
     void judgeAll();
+    void judgeSingleTask(int);
 
 private:
     Contest *curContest;

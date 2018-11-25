@@ -66,6 +66,7 @@ public slots:
     void judge(const QString&);
     void judge(const QString&, int);
     void judgeAll();
+    void judgeSingleTask(int);
     void stopJudgingSlot();
 
 signals:

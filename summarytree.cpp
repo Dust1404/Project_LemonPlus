@@ -116,6 +116,7 @@ void SummaryTree::setContest(Contest *contest)
                        this, SLOT(titleChanged(QString)));
     }
     curContest = contest;
+    emit taskChanged();
     if (! curContest) return;
     setEnabled(false);
     clear();
@@ -188,6 +189,7 @@ void SummaryTree::addTask()
     newItem->setFlags(Qt::ItemIsEditable | Qt::ItemIsSelectable | Qt::ItemIsEnabled);
     newItem->setText(0, tr("Problem %1").arg(++ addCount));
     editItem(newItem);
+    emit taskChanged();
 }
 
 void SummaryTree::addTestCase()
@@ -218,7 +220,7 @@ void SummaryTree::addTestCases()
     int index = indexOfTopLevelItem(curItem);
     Task *curTask = curContest->getTask(index);
     AddTestCasesWizard *wizard = new AddTestCasesWizard(this);
-    wizard->setSettings(settings, curTask->getTaskType() == Task::Traditional || curTask->getTaskType() == Task::Interaction, curTask->getTaskType() == Task::Interaction);
+    wizard->setSettings(settings, curTask->getTaskType() == Task::Traditional || curTask->getTaskType() == Task::Interaction);
     if (wizard->exec() == QDialog::Accepted) {
         QList<QStringList> inputFiles = wizard->getMatchedInputFiles();
         QList<QStringList> outputFiles = wizard->getMatchedOutputFiles();
@@ -265,6 +267,7 @@ void SummaryTree::deleteTask()
     }
     delete curItem;
     curContest->deleteTask(index);
+    emit taskChanged();
 }
 
 void SummaryTree::deleteTestCase()
@@ -317,4 +320,5 @@ void SummaryTree::titleChanged(const QString &title)
 {
     QTreeWidgetItem *curItem = currentItem();
     if (curItem) curItem->setText(0, title);
+    emit taskChanged();
 }

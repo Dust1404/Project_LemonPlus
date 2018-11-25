@@ -145,6 +145,6 @@ win32:RC_FILE = lemon.rc
 
 win32:LIBS += -lpsapi
 
-win32:CONFIG += qaxcontainer
+win32:QT += axcontainer
 
 RESOURCES += resource.qrc

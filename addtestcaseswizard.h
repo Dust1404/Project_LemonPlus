@@ -40,7 +40,7 @@ class AddTestCasesWizard : public QWizard
 public:
     explicit AddTestCasesWizard(QWidget *parent = 0);
     ~AddTestCasesWizard();
-    void setSettings(Settings*, bool, bool);
+    void setSettings(Settings*, bool);
     int getFullScore() const;
     int getTimeLimit() const;
     int getMemoryLimit() const;

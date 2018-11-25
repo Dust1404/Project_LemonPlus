@@ -215,6 +215,18 @@ void ResultViewer::judgeAll()
     refreshViewer();
 }
 
+void ResultViewer::judgeSingleTask(int taskID)
+{
+    //qDebug() << taskID;
+    JudgingDialog *dialog = new JudgingDialog(this);
+    dialog->setModal(true);
+    dialog->setContest(curContest);
+    dialog->show();
+    dialog->judgeSingleTask(taskID);
+    delete dialog;
+    refreshViewer();
+}
+
 void ResultViewer::clearPath(const QString &curDir)
 {
     QDir dir(curDir);

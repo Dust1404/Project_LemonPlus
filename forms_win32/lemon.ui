@@ -34,7 +34,7 @@
        <string notr="true">font-size: 9pt;</string>
       </property>
       <property name="currentIndex">
-       <number>0</number>
+       <number>1</number>
       </property>
       <widget class="QWidget" name="tasksTab">
        <attribute name="title">
@@ -190,6 +190,13 @@
            </widget>
           </item>
           <item>
+           <widget class="QPushButton" name="judgeSingleTaskButton">
+            <property name="text">
+             <string>Judge Single Task</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <widget class="QPushButton" name="judgeButton">
             <property name="enabled">
              <bool>false</bool>
@@ -247,6 +254,7 @@
     </property>
     <addaction name="judgeAction"/>
     <addaction name="judgeAllAction"/>
+    <addaction name="judgeSingleTaskAction"/>
     <addaction name="separator"/>
     <addaction name="addTasksAction"/>
     <addaction name="exportAction"/>
@@ -358,6 +366,11 @@
   <action name="openFolderAction">
    <property name="text">
     <string>Open Current Contest Folder</string>
+   </property>
+  </action>
+  <action name="judgeSingleTaskAction">
+   <property name="text">
+    <string>Judge Single Task</string>
    </property>
   </action>
  </widget>

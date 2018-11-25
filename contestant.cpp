@@ -233,9 +233,9 @@ void Contestant::writeToStream(QDataStream &out)
     out << score;
     out << timeUsed;
     out << memoryUsed;
-    out << (quint32) judgingTime.date().toJulianDay();
-    out << (quint32) judgingTime.time().msecsSinceStartOfDay();
-    out << (quint8) judgingTime.timeSpec();
+    out << static_cast<quint32>(judgingTime.date().toJulianDay());
+    out << static_cast<quint32>(judgingTime.time().msecsSinceStartOfDay());
+    out << static_cast<quint8>(judgingTime.timeSpec());
     out << compileState.size();
     for (int i = 0; i < compileState.size(); i ++) {
         out << int(compileState[i]);

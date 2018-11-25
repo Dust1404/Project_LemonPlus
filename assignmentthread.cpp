@@ -140,7 +140,10 @@ bool AssignmentThread::traditionalTaskPrepare()
             QFile::copy(Settings::sourcePath() + contestantName + (task->getSubFolderCheck() ? QDir::separator() + task->getSourceFileName() : QString("")) + QDir::separator() + sourceFile,
                         Settings::temporaryPath() + contestantName + QDir::separator() + sourceFile);
             if(task->getTaskType() == Task::Interaction)
-                QFile::copy(Settings::dataPath() + task->getInteractor(), Settings::temporaryPath() + contestantName + QDir::separator() + "interactor.h");
+            {
+                QFile::copy(Settings::dataPath() + task->getInteractor(), Settings::temporaryPath() + contestantName + QDir::separator() + task->getInteractorName());
+                QFile::copy(Settings::dataPath() + task->getGrader(), Settings::temporaryPath() + contestantName + QDir::separator() + "__grader.cpp");
+            }
             QStringList configurationNames = compilerList[i]->getConfigurationNames();
             QStringList compilerArguments = compilerList[i]->getCompilerArguments();
             QStringList interpreterArguments = compilerList[i]->getInterpreterArguments();
@@ -178,7 +181,10 @@ bool AssignmentThread::traditionalTaskPrepare()
                     
                     if (compilerList[i]->getCompilerType() != Compiler::InterpretiveWithoutByteCode) {
                         QString arguments = compilerArguments[j];
-                        arguments.replace("%s.*", sourceFile);
+                        if (task->getTaskType() == Task::Interaction)
+                            arguments.replace("%s.*", sourceFile + " __grader.cpp");
+                        else
+                            arguments.replace("%s.*", sourceFile);
                         arguments.replace("%s", task->getSourceFileName());
                         QProcess *compiler = new QProcess(this);
                         compiler->setProcessChannelMode(QProcess::MergedChannels);

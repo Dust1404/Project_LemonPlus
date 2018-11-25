@@ -88,6 +88,14 @@ void JudgingDialog::judgeAll()
     accept();
 }
 
+void JudgingDialog::judgeSingleTask(int taskID)
+{
+    stopJudging = false;
+    ui->progressBar->setMaximum(curContest->getContestantList().size() * curContest->getTask(taskID)->getTotalTimeLimit());
+    curContest->judgeSingleTask(taskID);
+    accept();
+}
+
 void JudgingDialog::singleCaseFinished(int progress, int x, int y, int result)
 {
     QTextBlockFormat blockFormat;

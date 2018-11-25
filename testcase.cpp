@@ -101,12 +101,16 @@ void TestCase::setDependenceSubtask(const QStringList &list)
 
 bool TestCase::checkDependenceSubtask(const QStringList &list)
 {
+    QList<int> temp;
     for(int i = 0; i != list.size(); ++i) {
         int     t;
-        bool    flag;
         t = list[i].toInt();
         if(t <= 0 || t >= index)
             return false;
+        for (int j = 0; j != temp.size(); ++j)
+            if (temp[j] == t)
+                return false;
+        temp.push_back(t);
     }
     return true;
 }

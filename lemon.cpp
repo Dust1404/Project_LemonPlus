@@ -55,6 +55,9 @@ Lemon::Lemon(QWidget *parent) :
     dataDirWatcher = 0;
     settings->loadSettings();
     
+    TaskMenu = new QMenu();
+    signalMapper = new QSignalMapper();
+
     ui->summary->setSettings(settings);
     ui->taskEdit->setSettings(settings);
     ui->testCaseEdit->setSettings(settings);
@@ -102,6 +105,8 @@ Lemon::Lemon(QWidget *parent) :
             this, SLOT(aboutLemon()));
     connect(ui->exitAction, SIGNAL(triggered()),
             this, SLOT(close()));
+    connect(ui->summary, SIGNAL(taskChanged()),
+            this, SLOT(refreshTaskList()));
     
     appTranslator = new QTranslator(this);
     qtTranslator = new QTranslator(this);
@@ -134,6 +139,7 @@ Lemon::Lemon(QWidget *parent) :
 
 Lemon::~Lemon()
 {
+    delete TaskMenu;
     delete ui;
 }
 
@@ -245,7 +251,7 @@ void Lemon::summarySelectionChanged()
         int testCaseIndex = parentItem->indexOfChild(curItem);
         Task *curTask = curContest->getTask(taskIndex);
         TestCase *curTestCase = curTask->getTestCase(testCaseIndex);
-        ui->testCaseEdit->setEditTestCase(curTestCase, curTask->getTaskType() == Task::Traditional || curTask->getTaskType() == Task::Interaction, curTask->getTaskType() == Task::Interaction);
+        ui->testCaseEdit->setEditTestCase(curTestCase, curTask->getTaskType() == Task::Traditional || curTask->getTaskType() == Task::Interaction);
         ui->editWidget->setCurrentIndex(2);
     }
 }
@@ -273,9 +279,13 @@ void Lemon::refreshButtonClicked()
     if (ui->resultViewer->rowCount() > 0) {
         ui->judgeAllButton->setEnabled(true);
         ui->judgeAllAction->setEnabled(true);
+        ui->judgeSingleTaskButton->setEnabled(true);
+        ui->judgeSingleTaskAction->setEnabled(true);
     } else {
         ui->judgeAllButton->setEnabled(false);
         ui->judgeAllAction->setEnabled(false);
+        ui->judgeSingleTaskButton->setEnabled(false);
+        ui->judgeSingleTaskAction->setEnabled(false);
     }
 }
 
@@ -286,6 +296,8 @@ void Lemon::tabIndexChanged(int index)
         ui->judgeButton->setEnabled(false);
         ui->judgeAllAction->setEnabled(false);
         ui->judgeAllButton->setEnabled(false);
+        ui->judgeSingleTaskAction->setEnabled(false);
+        ui->judgeSingleTaskButton->setEnabled(false);
     } else {
         QList<QTableWidgetSelectionRange> selectionRange = ui->resultViewer->selectedRanges();
         if (selectionRange.size() > 0) {
@@ -298,9 +310,13 @@ void Lemon::tabIndexChanged(int index)
         if (ui->resultViewer->rowCount() > 0) {
             ui->judgeAllAction->setEnabled(true);
             ui->judgeAllButton->setEnabled(true);
+            ui->judgeSingleTaskButton->setEnabled(true);
+            ui->judgeSingleTaskAction->setEnabled(true);
         } else {
             ui->judgeAllAction->setEnabled(false);
             ui->judgeAllButton->setEnabled(false);
+            ui->judgeSingleTaskButton->setEnabled(false);
+            ui->judgeSingleTaskAction->setEnabled(false);
         }
     }
 }
@@ -322,9 +338,13 @@ void Lemon::contestantDeleted()
     if (ui->resultViewer->rowCount() > 0) {
         ui->judgeAllButton->setEnabled(true);
         ui->judgeAllAction->setEnabled(true);
+        ui->judgeSingleTaskButton->setEnabled(true);
+        ui->judgeSingleTaskAction->setEnabled(true);
     } else {
         ui->judgeAllButton->setEnabled(false);
         ui->judgeAllAction->setEnabled(false);
+        ui->judgeSingleTaskButton->setEnabled(false);
+        ui->judgeSingleTaskAction->setEnabled(false);
     }
 }
 
@@ -634,4 +654,34 @@ void Lemon::setUiLanguage()
     QAction *language = dynamic_cast<QAction*>(sender());
     settings->setUiLanguage(language->data().toString());
     loadUiLanguage();
+}
+
+void Lemon::refreshTaskList()
+{
+    for (int i = 0; i != TaskList.size(); ++i)
+    {
+        disconnect(TaskList[i]);
+        delete TaskList[i];
+    }
+    TaskList.clear();
+    TaskMenu->clear();
+    delete signalMapper;
+    ui->judgeSingleTaskButton->setMenu(TaskMenu);
+    ui->judgeSingleTaskAction->setMenu(TaskMenu);
+    if (!curContest)
+        return;
+    signalMapper = new QSignalMapper();
+    const QList<Task*> &taskList = curContest->getTaskList();
+    for (int i = 0; i != taskList.size(); ++i)
+    {
+        TaskList.push_back(new QAction(NULL));
+        TaskList[i]->setText(taskList[i]->getProblemTile());
+        connect(TaskList[i], SIGNAL(triggered()), signalMapper, SLOT(map()));
+        signalMapper->setMapping(TaskList[i], i);
+        //qDebug() << taskList[i]->getProblemTile() << " connect done";
+    }
+    connect(signalMapper, SIGNAL(mapped(int)), ui->resultViewer, SLOT(judgeSingleTask(int)));
+    TaskMenu->addActions(TaskList);
+    ui->judgeSingleTaskButton->setMenu(TaskMenu);
+    ui->judgeSingleTaskAction->setMenu(TaskMenu);
 }

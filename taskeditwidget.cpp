@@ -36,15 +36,21 @@ TaskEditWidget::TaskEditWidget(QWidget *parent) :
     
     ui->specialJudge->setFilters(QDir::Files | QDir::Executable);
     ui->interactorPath->setFilters(QDir::Files);
+    ui->graderPath->setFilters(QDir::Files);
     connect(this, SIGNAL(dataPathChanged()),
             ui->specialJudge, SLOT(refreshFileList()));
     connect(this, SIGNAL(dataPathChanged()),
             ui->interactorPath, SLOT(refreshFileList()));
+    connect(this, SIGNAL(dataPathChanged()),
+            ui->graderPath, SLOT(refreshFileList()));
     
     ui->sourceFileName->setValidator(new QRegExpValidator(QRegExp("\\w+"), this));
     ui->inputFileName->setValidator(new QRegExpValidator(QRegExp("(\\w+)(\\.\\w+)?"), this));
     ui->outputFileName->setValidator(new QRegExpValidator(QRegExp("(\\w+)(\\.\\w+)?"), this));
+    ui->interactorName->setValidator(new QRegExpValidator(QRegExp("(\\w+)(\\.\\w+)?"), this));
     ui->answerFileExtension->setValidator(new QRegExpValidator(QRegExp("\\w+"), this));
+
+    //ui->interactionButton->setVisible(false); //rebuilding interaction, remove it temporarily
     
     connect(ui->problemTitle, SIGNAL(textChanged(QString)),
             this, SLOT(problemTitleChanged(QString)));
@@ -76,6 +82,10 @@ TaskEditWidget::TaskEditWidget(QWidget *parent) :
             this, SLOT(specialJudgeChanged(QString)));
     connect(ui->interactorPath, SIGNAL(textChanged(QString)),
             this, SLOT(interactorChanged(QString)));
+    connect(ui->interactorName, SIGNAL(textChanged(QString)),
+            this, SLOT(interactorNameChanged(QString)));
+    connect(ui->graderPath, SIGNAL(textChanged(QString)),
+            this, SLOT(graderChanged(QString)));
     connect(ui->compilersList, SIGNAL(currentRowChanged(int)),
             this, SLOT(compilerSelectionChanged()));
     connect(ui->configurationSelect, SIGNAL(currentIndexChanged(int)),
@@ -125,9 +135,14 @@ void TaskEditWidget::setEditTask(Task *task)
     ui->realPrecision->setValue(editTask->getRealPrecision());
     ui->specialJudge->setText(editTask->getSpecialJudge());
     ui->interactorPath->setText(editTask->getInteractor());
+    ui->interactorName->setText(editTask->getInteractorName());
+    ui->graderPath->setText(editTask->getGrader());
     ui->standardInputCheck->setChecked(editTask->getStandardInputCheck());
     ui->standardOutputCheck->setChecked(editTask->getStandardOutputCheck());
-    ui->interactorPath->setVisible(editTask->getTaskType() == Task::Interaction);
+    //ui->interactorPathLabel->setVisible(editTask->getTaskType() == Task::Interaction);
+    //ui->interactorPath->setVisible(editTask->getTaskType() == Task::Interaction);
+    //ui->graderPathLabel->setVisible(editTask->getTaskType() == Task::Interaction);
+    //ui->graderPath->setVisible(editTask->getTaskType() == Task::Interaction);
     ui->answerFileExtension->setText(editTask->getAnswerFileExtension());
     refreshCompilerConfiguration();
     if (editTask->getTaskType() == Task::Traditional) {
@@ -151,22 +166,26 @@ void TaskEditWidget::refreshWidgetState()
     if (! editTask) return;
     ui->interactorPathLabel->setVisible(editTask->getTaskType() == Task::Interaction);
     ui->interactorPath->setVisible(editTask->getTaskType() == Task::Interaction);
-    ui->comparisonSetting->setVisible(editTask->getTaskType() != Task::Interaction);
+    ui->graderPathLabel->setVisible(editTask->getTaskType() == Task::Interaction);
+    ui->graderPath->setVisible(editTask->getTaskType() == Task::Interaction);
+    ui->interactorNameLabel->setVisible(editTask->getTaskType() == Task::Interaction);
+    ui->interactorName->setVisible(editTask->getTaskType() == Task::Interaction);
+    //ui->comparisonSetting->setVisible(editTask->getTaskType() != Task::Interaction);
     ui->sourceFileName->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
     ui->sourceFileNameLabel->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
     ui->inputFileName->setEnabled((editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction) && ! editTask->getStandardInputCheck());
     ui->inputFileNameLabel->setEnabled(editTask->getTaskType() == Task::Traditional|| editTask->getTaskType() == Task::Interaction);
     ui->standardInputCheck->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
-    ui->outputFileName->setEnabled(editTask->getTaskType() == Task::Traditional && ! editTask->getStandardOutputCheck());
-    ui->outputFileNameLabel->setEnabled(editTask->getTaskType() == Task::Traditional);
-    ui->standardOutputCheck->setEnabled(editTask->getTaskType() == Task::Traditional);
+    ui->outputFileName->setEnabled((editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction) && ! editTask->getStandardOutputCheck());
+    ui->outputFileNameLabel->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
+    ui->standardOutputCheck->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
     ui->compilerSettingsLabel->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
     ui->compilersList->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
     ui->configurationLabel->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
     ui->configurationSelect->setEditable(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::Interaction);
-    ui->comparisonMode->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::AnswersOnly);
-    ui->answerFileExtension->setEnabled(editTask->getTaskType() == Task::AnswersOnly);
-    ui->answerFileExtensionLabel->setEnabled(editTask->getTaskType() == Task::AnswersOnly);
+    //ui->comparisonMode->setEnabled(editTask->getTaskType() == Task::Traditional || editTask->getTaskType() == Task::AnswersOnly);
+    ui->answerFileExtension->setVisible(editTask->getTaskType() == Task::AnswersOnly);
+    ui->answerFileExtensionLabel->setVisible(editTask->getTaskType() == Task::AnswersOnly);
     ui->comparisonSetting->setCurrentIndex(ui->comparisonMode->currentIndex());
 }
 
@@ -279,6 +298,19 @@ void TaskEditWidget::interactorChanged(const QString& text)
 {
     if(! editTask) return;
     editTask->setInteractor(text);
+}
+
+void TaskEditWidget::interactorNameChanged(const QString& text)
+{
+    if (!editTask)
+        return;
+    editTask->setInteractorName(text);
+}
+
+void TaskEditWidget::graderChanged(const QString& text)
+{
+    if (!editTask) return;
+    editTask->setGrader(text);
 }
 
 void TaskEditWidget::refreshProblemTitle(const QString &title)

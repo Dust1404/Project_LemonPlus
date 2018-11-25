@@ -107,6 +107,16 @@ const QString& Task::getInteractor() const
     return interactor;
 }
 
+const QString& Task::getInteractorName() const
+{
+    return interactorName;
+}
+
+const QString& Task::getGrader() const
+{
+    return grader;
+}
+
 QString Task::getCompilerConfiguration(const QString &compilerName) const
 {
     return compilerConfiguration.value(compilerName);
@@ -182,6 +192,16 @@ void Task::setSpecialJudge(const QString &fileName)
 void Task::setInteractor(const QString& fileName)
 {
     interactor = fileName;
+}
+
+void Task::setInteractorName(const QString& fileName)
+{
+    interactorName = fileName;
+}
+
+void Task::setGrader(const QString& fileName)
+{
+    grader = fileName;
 }
 
 void Task::setCompilerConfiguration(const QString &compiler, const QString &configuration)
@@ -269,9 +289,19 @@ void Task::writeToStream(QDataStream &out)
     out << int(comparisonMode);
     out << diffArguments;
     out << realPrecision;
-    QString _specialJudge = taskType == Task::Interaction ? interactor : specialJudge;
+    QString _specialJudge = specialJudge;
     _specialJudge.replace(QDir::separator(), '/');
     out << _specialJudge;
+    if (taskType== Task::Interaction)
+    {
+        QString _temp = interactor;
+        _temp.replace(QDir::separator(), '/');
+        out << _temp;
+        _temp = grader;
+        _temp.replace(QDir::separator(), '/');
+        out << _temp;
+        out << interactorName;
+    }
     out << compilerConfiguration;
     out << answerFileExtension;
     out << testCaseList.size();
@@ -296,13 +326,16 @@ void Task::readFromStream(QDataStream &in)
     comparisonMode = ComparisonMode(tmp);
     in >> diffArguments;
     in >> realPrecision;
-    QString _specialJudge;
-    in >> _specialJudge;
-    _specialJudge.replace('/', QDir::separator());
-    if(taskType == Task::Interaction)
-        interactor = _specialJudge;
-    else
-        specialJudge = _specialJudge;
+    in >> specialJudge;
+    specialJudge.replace('/', QDir::separator());
+    if (taskType == Task::Interaction)
+    {
+        in >> interactor;
+        interactor.replace('/', QDir::separator());
+        in >> grader;
+        grader.replace('/', QDir::separator());
+        in >> interactorName;
+    }
     in >> compilerConfiguration;
     in >> answerFileExtension;
     in >> count;

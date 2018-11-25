@@ -44,6 +44,7 @@ public:
     void setContest(Contest*);
     void judge(const QStringList&);
     void judge(const QString&, int);
+    void judgeSingleTask(int);
     void judgeAll();
     void reject();
 

@@ -14,70 +14,6 @@
    <string>Form</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="5" column="1" colspan="2">
-    <widget class="QComboBox" name="comparisonMode">
-     <property name="styleSheet">
-      <string notr="true">font-size: 9pt;</string>
-     </property>
-     <item>
-      <property name="text">
-       <string>Line-by-line mode</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Line-by-line mode (ignore extra spaces and tabs)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>External tool mode (diff)</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Real number mode</string>
-      </property>
-     </item>
-     <item>
-      <property name="text">
-       <string>Special judge mode</string>
-      </property>
-     </item>
-    </widget>
-   </item>
-   <item row="5" column="0">
-    <widget class="QLabel" name="comparisonModeLabel">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size:9pt;font-weight:bold;</string>
-     </property>
-     <property name="text">
-      <string>Comparison Mode</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="0">
-    <widget class="QLabel" name="taskTypeLabel">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size:9pt;font-weight:bold;</string>
-     </property>
-     <property name="text">
-      <string>Task Type</string>
-     </property>
-    </widget>
-   </item>
    <item row="6" column="1" colspan="2">
     <widget class="QStackedWidget" name="comparisonSetting">
      <property name="sizePolicy">
@@ -182,26 +118,23 @@
      </widget>
     </widget>
    </item>
-   <item row="0" column="0">
-    <widget class="QLabel" name="problemTitleLabel">
-     <property name="sizePolicy">
-      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
-       <horstretch>0</horstretch>
-       <verstretch>0</verstretch>
-      </sizepolicy>
-     </property>
-     <property name="styleSheet">
-      <string notr="true">font-size:9pt;font-weight:bold;</string>
+   <item row="9" column="0">
+    <widget class="QLabel" name="graderPathLabel">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
      </property>
      <property name="text">
-      <string>Problem Title</string>
+      <string>Grader Path</string>
      </property>
     </widget>
    </item>
-   <item row="0" column="1" colspan="2">
-    <widget class="QLineEdit" name="problemTitle"/>
+   <item row="9" column="1" colspan="2">
+    <widget class="FileLineEdit" name="graderPath"/>
    </item>
-   <item row="8" column="0">
+   <item row="11" column="0">
     <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
       <widget class="QLabel" name="compilerSettingsLabel">
@@ -245,6 +178,25 @@
       </spacer>
      </item>
     </layout>
+   </item>
+   <item row="0" column="0">
+    <widget class="QLabel" name="problemTitleLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size:9pt;font-weight:bold;</string>
+     </property>
+     <property name="text">
+      <string>Problem Title</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="1" colspan="2">
+    <widget class="QLineEdit" name="problemTitle"/>
    </item>
    <item row="1" column="1" colspan="2">
     <layout class="QHBoxLayout" name="horizontalLayout_2">
@@ -293,53 +245,7 @@
      </item>
     </layout>
    </item>
-   <item row="8" column="1" colspan="2">
-    <layout class="QVBoxLayout" name="verticalLayout_4">
-     <property name="spacing">
-      <number>12</number>
-     </property>
-     <item>
-      <widget class="QListWidget" name="compilersList"/>
-     </item>
-     <item>
-      <layout class="QHBoxLayout" name="horizontalLayout_16">
-       <property name="spacing">
-        <number>15</number>
-       </property>
-       <item>
-        <widget class="QLabel" name="configurationLabel">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="sizePolicy">
-          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
-           <horstretch>0</horstretch>
-           <verstretch>0</verstretch>
-          </sizepolicy>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">font-size: 9pt;</string>
-         </property>
-         <property name="text">
-          <string>Configuration:</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="configurationSelect">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="styleSheet">
-          <string notr="true">font-size:9pt;</string>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </item>
-    </layout>
-   </item>
-   <item row="9" column="0" colspan="3">
+   <item row="12" column="0" colspan="3">
     <layout class="QHBoxLayout" name="horizontalLayout">
      <property name="spacing">
       <number>10</number>
@@ -397,6 +303,55 @@
      </item>
     </layout>
    </item>
+   <item row="11" column="1" colspan="2">
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <property name="spacing">
+      <number>12</number>
+     </property>
+     <item>
+      <widget class="QListWidget" name="compilersList"/>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_16">
+       <property name="spacing">
+        <number>15</number>
+       </property>
+       <item>
+        <widget class="QLabel" name="configurationLabel">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-size: 9pt;</string>
+         </property>
+         <property name="text">
+          <string>Configuration:</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="configurationSelect">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-size:9pt;</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item row="3" column="1">
+    <widget class="QLineEdit" name="inputFileName"/>
+   </item>
    <item row="4" column="0">
     <widget class="QLabel" name="outputFileNameLabel">
      <property name="sizePolicy">
@@ -410,6 +365,16 @@
      </property>
      <property name="text">
       <string>Output File Name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="2">
+    <widget class="QCheckBox" name="standardOutputCheck">
+     <property name="styleSheet">
+      <string notr="true">font-size: 9pt;</string>
+     </property>
+     <property name="text">
+      <string>Standard output</string>
      </property>
     </widget>
    </item>
@@ -429,19 +394,6 @@
      </property>
     </widget>
    </item>
-   <item row="4" column="2">
-    <widget class="QCheckBox" name="standardOutputCheck">
-     <property name="styleSheet">
-      <string notr="true">font-size: 9pt;</string>
-     </property>
-     <property name="text">
-      <string>Standard output</string>
-     </property>
-    </widget>
-   </item>
-   <item row="3" column="1">
-    <widget class="QLineEdit" name="inputFileName"/>
-   </item>
    <item row="2" column="0">
     <widget class="QLabel" name="sourceFileNameLabel">
      <property name="sizePolicy">
@@ -457,9 +409,6 @@
       <string>Source File Name</string>
      </property>
     </widget>
-   </item>
-   <item row="4" column="1">
-    <widget class="QLineEdit" name="outputFileName"/>
    </item>
    <item row="3" column="2">
     <widget class="QCheckBox" name="standardInputCheck">
@@ -484,6 +433,12 @@
      </property>
     </widget>
    </item>
+   <item row="4" column="1">
+    <widget class="QLineEdit" name="outputFileName"/>
+   </item>
+   <item row="2" column="1">
+    <widget class="QLineEdit" name="sourceFileName"/>
+   </item>
    <item row="7" column="1" colspan="2">
     <widget class="FileLineEdit" name="interactorPath">
      <property name="sizePolicy">
@@ -494,15 +449,92 @@
      </property>
     </widget>
    </item>
-   <item row="2" column="1">
-    <widget class="QLineEdit" name="sourceFileName"/>
-   </item>
    <item row="2" column="2">
     <widget class="QCheckBox" name="subFolderCheck">
      <property name="text">
       <string>Subfolder</string>
      </property>
     </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QLabel" name="comparisonModeLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size:9pt;font-weight:bold;</string>
+     </property>
+     <property name="text">
+      <string>Comparison Mode</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="1" colspan="2">
+    <widget class="QComboBox" name="comparisonMode">
+     <property name="styleSheet">
+      <string notr="true">font-size: 9pt;</string>
+     </property>
+     <item>
+      <property name="text">
+       <string>Line-by-line mode</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Line-by-line mode (ignore extra spaces and tabs)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>External tool mode (diff)</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Real number mode</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>Special judge mode</string>
+      </property>
+     </item>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QLabel" name="taskTypeLabel">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Fixed">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">font-size:9pt;font-weight:bold;</string>
+     </property>
+     <property name="text">
+      <string>Task Type</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="0">
+    <widget class="QLabel" name="interactorNameLabel">
+     <property name="font">
+      <font>
+       <weight>75</weight>
+       <bold>true</bold>
+      </font>
+     </property>
+     <property name="text">
+      <string>Interactor Name</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="1" colspan="2">
+    <widget class="QLineEdit" name="interactorName"/>
    </item>
   </layout>
  </widget>

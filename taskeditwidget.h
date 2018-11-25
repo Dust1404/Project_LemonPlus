@@ -67,6 +67,8 @@ private slots:
     void realPrecisionChanged(int);
     void specialJudgeChanged(const QString&);
     void interactorChanged(const QString&);
+    void interactorNameChanged(const QString&);
+    void graderChanged(const QString&);
     void refreshProblemTitle(const QString&);
     void refreshCompilerConfiguration();
     void compilerSelectionChanged();
