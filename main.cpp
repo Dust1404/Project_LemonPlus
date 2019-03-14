@@ -21,6 +21,9 @@
  **/
 
 #include <QApplication>
+#include <QSplashScreen>  
+#include <QPixmap>  
+#include <iostream>
 #include "qtsingleapplication/qtsingleapplication.h"
 #include "lemon.h"
 
@@ -36,11 +39,21 @@ int main(int argc, char *argv[])
         a.activateWindow();
         return 0;
     }
-    
+
+    QPixmap pixmap(":/logo/proj.png");  
+    QSplashScreen screen(pixmap);  
+    screen.show();  
+
+    qint64 startTime = QDateTime::currentMSecsSinceEpoch();
+    do{  
+        a.processEvents();  
+    } while (QDateTime::currentMSecsSinceEpoch() - startTime <= 800);//5为需要延时的秒数  
+
     Lemon w;
     a.setActivationWindow(&w);
     
     w.show();
+    screen.finish(&w);
     w.welcome();
     
     return a.exec();

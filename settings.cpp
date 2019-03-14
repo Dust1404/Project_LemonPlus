@@ -295,11 +295,11 @@ void Settings::loadSettings()
     settings.beginGroup("GeneralSettings");
     defaultFullScore = settings.value("DefaultFullScore", 10).toInt();
     defaultTimeLimit = settings.value("DefaultTimeLimit", 1000).toInt();
-    defaultMemoryLimit = settings.value("DefaultMemoryLimit", 64).toInt();
+    defaultMemoryLimit = settings.value("DefaultMemoryLimit", 256).toInt();
     compileTimeLimit = settings.value("CompileTimeLimit", 10000).toInt();
     specialJudgeTimeLimit = settings.value("SpecialJudgeTimeLimit", 10000).toInt();
     fileSizeLimit = settings.value("FileSizeLimit", 50).toInt();
-    rejudgeTimes = settings.value("MaximumRejudgeTimes", 2).toInt();
+    rejudgeTimes = settings.value("MaximumRejudgeTimes", 1).toInt();
     defaultInputFileExtension = settings.value("DefaultInputFileExtension", "in").toString();
     defaultOutputFileExtension = settings.value("DefaultOuputFileExtension", "out").toString();
     inputFileExtensions = settings.value("InputFileExtensions", QStringList() << "in").toStringList();
@@ -357,17 +357,17 @@ void Settings::loadSettings()
 
 int Settings::upperBoundForFullScore()
 {
-    return 100;
+    return 2147483647;
 }
 
 int Settings::upperBoundForTimeLimit()
 {
-    return 1000 * 60 * 10;
+    return 1000 * 60 * 60 * 24;
 }
 
 int Settings::upperBoundForMemoryLimit()
 {
-    return 1024;
+    return 1048576;
 }
 
 int Settings::upperBoundForFileSizeLimit()

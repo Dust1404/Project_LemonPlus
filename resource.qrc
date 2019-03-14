@@ -1,4 +1,7 @@
 <RCC>
+    <qresource prefix="/logo">
+        <file>proj.png</file>
+    </qresource>
     <qresource prefix="/icon">
         <file>rod.png</file>
         <file>downarrow.png</file>
@@ -17,5 +20,9 @@
     </qresource>
     <qresource prefix="/watcher">
         <file>watcher_unix</file>
+    </qresource>
+    <qresource prefix="/tools">
+        <file>shin.sh</file>
+        <file>shout.sh</file>
     </qresource>
 </RCC>

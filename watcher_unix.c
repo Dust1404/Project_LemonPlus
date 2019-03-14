@@ -38,7 +38,7 @@ int main(int argc, char *argv[]) {
     sscanf(argv[5], "%d", &timeLimit);
     timeLimit = (timeLimit - 1) / 1000 + 1;
     sscanf(argv[6], "%d", &memoryLimit);
-    memoryLimit *= 1024 * 1024;
+	memoryLimit *= 1024 * 1024;
     
     pid = fork();
     if (pid > 0) {
@@ -68,8 +68,12 @@ int main(int argc, char *argv[]) {
         if (strlen(argv[2]) > 0) freopen(argv[2], "r", stdin);
         if (strlen(argv[3]) > 0) freopen(argv[3], "w", stdout);
         if (strlen(argv[4]) > 0) freopen(argv[4], "w", stderr);
-        if (memoryLimit != -1)
-            setrlimit(RLIMIT_AS, &(struct rlimit){memoryLimit, memoryLimit});
+		if (memoryLimit > 0)
+		{
+		    setrlimit(RLIMIT_AS, &(struct rlimit){memoryLimit, memoryLimit});
+		    setrlimit(RLIMIT_STACK, &(struct rlimit){memoryLimit, memoryLimit});
+		}
+		else setrlimit(RLIMIT_STACK, &(struct rlimit){2147483647, 2147483647});
         setrlimit(RLIMIT_CPU, &(struct rlimit){timeLimit, timeLimit + 1});
         if (execlp("bash", "bash", "-c", argv[1], NULL) == -1) return 1;
     }
