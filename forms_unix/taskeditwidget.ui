@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>577</width>
-    <height>438</height>
+    <height>522</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -90,7 +90,7 @@
         <string notr="true">font-size: 11pt;</string>
        </property>
        <property name="text">
-        <string>Traditional</string>
+        <string>&amp;Traditional</string>
        </property>
       </widget>
      </item>
@@ -100,7 +100,7 @@
         <string notr="true">font-size: 11pt;</string>
        </property>
        <property name="text">
-        <string>Answers Only</string>
+        <string>&amp;Answers Only</string>
        </property>
       </widget>
      </item>
@@ -112,7 +112,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Interaction</string>
+        <string>&amp;Interaction</string>
        </property>
       </widget>
      </item>

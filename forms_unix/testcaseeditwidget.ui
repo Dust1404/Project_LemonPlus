@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>440</width>
-    <height>337</height>
+    <height>347</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -162,84 +162,63 @@
          </property>
         </widget>
        </item>
+       <item row="2" column="0">
+        <widget class="QLabel" name="subtaskDependenceLabel">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+         <property name="font">
+          <font>
+           <pointsize>10</pointsize>
+           <weight>75</weight>
+           <bold>true</bold>
+          </font>
+         </property>
+         <property name="styleSheet">
+          <string notr="true">font-size: 10pt;</string>
+         </property>
+         <property name="text">
+          <string>Subtask Dependence</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="1">
+        <widget class="QLineEdit" name="subtaskDependecne">
+         <property name="placeholderText">
+          <string>seperate by &quot;,&quot;</string>
+         </property>
+        </widget>
+       </item>
+       <item row="2" column="2">
+        <widget class="QPushButton" name="subtaskDependenceClearButton">
+         <property name="minimumSize">
+          <size>
+           <width>60</width>
+           <height>0</height>
+          </size>
+         </property>
+         <property name="maximumSize">
+          <size>
+           <width>60</width>
+           <height>16777215</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>Clear</string>
+         </property>
+        </widget>
+       </item>
       </layout>
      </item>
     </layout>
    </item>
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayout" stretch="0,0,0,0">
+    <layout class="QGridLayout" name="gridLayout_2">
      <property name="spacing">
       <number>6</number>
-     </property>
-     <property name="rightMargin">
-      <number>0</number>
-     </property>
-     <property name="bottomMargin">
-      <number>0</number>
-     </property>
-     <item>
-      <widget class="QLabel" name="subtaskDependenceLabel">
-       <property name="sizePolicy">
-        <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-         <horstretch>0</horstretch>
-         <verstretch>0</verstretch>
-        </sizepolicy>
-       </property>
-       <property name="font">
-        <font>
-         <pointsize>11</pointsize>
-         <weight>75</weight>
-         <bold>true</bold>
-        </font>
-       </property>
-       <property name="text">
-        <string>Subtask Dependence</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="subtaskDependecne"/>
-     </item>
-     <item>
-      <widget class="QLabel" name="seperateLabel">
-       <property name="font">
-        <font>
-         <pointsize>9</pointsize>
-        </font>
-       </property>
-       <property name="text">
-        <string>(seperate by &quot;,&quot;)</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QPushButton" name="subtaskDependenceClearButton">
-       <property name="minimumSize">
-        <size>
-         <width>60</width>
-         <height>0</height>
-        </size>
-       </property>
-       <property name="maximumSize">
-        <size>
-         <width>60</width>
-         <height>16777215</height>
-        </size>
-       </property>
-       <property name="text">
-        <string>Clear</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </item>
-   <item>
-    <layout class="QGridLayout" name="gridLayout_2">
-     <property name="horizontalSpacing">
-      <number>12</number>
-     </property>
-     <property name="verticalSpacing">
-      <number>7</number>
      </property>
      <item row="0" column="0">
       <widget class="QLabel" name="fullScoreLabel">
@@ -249,8 +228,15 @@
          <verstretch>0</verstretch>
         </sizepolicy>
        </property>
+       <property name="font">
+        <font>
+         <pointsize>10</pointsize>
+         <weight>75</weight>
+         <bold>true</bold>
+        </font>
+       </property>
        <property name="styleSheet">
-        <string notr="true">font-size:11pt;font-weight:bold;</string>
+        <string notr="true">font-size:10pt;font-weight:bold;</string>
        </property>
        <property name="text">
         <string>Full Score</string>
@@ -295,7 +281,7 @@
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string notr="true">font-size:11pt;font-weight:bold;</string>
+        <string notr="true">font-size:10pt;font-weight:bold;</string>
        </property>
        <property name="text">
         <string>Time Limit</string>
@@ -360,7 +346,7 @@
         </sizepolicy>
        </property>
        <property name="styleSheet">
-        <string notr="true">font-size:11pt;font-weight:bold;</string>
+        <string notr="true">font-size:10pt;font-weight:bold;</string>
        </property>
        <property name="text">
         <string>Memory Limit</string>

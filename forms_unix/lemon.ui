@@ -30,11 +30,41 @@
       <property name="enabled">
        <bool>true</bool>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
+      <property name="autoFillBackground">
+       <bool>false</bool>
+      </property>
       <property name="styleSheet">
-       <string notr="true">font-size: 11pt;</string>
+       <string notr="true">font-size: 9pt;</string>
+      </property>
+      <property name="tabPosition">
+       <enum>QTabWidget::West</enum>
+      </property>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
        <number>1</number>
+      </property>
+      <property name="elideMode">
+       <enum>Qt::ElideNone</enum>
+      </property>
+      <property name="documentMode">
+       <bool>false</bool>
+      </property>
+      <property name="tabsClosable">
+       <bool>false</bool>
+      </property>
+      <property name="movable">
+       <bool>false</bool>
+      </property>
+      <property name="tabBarAutoHide">
+       <bool>false</bool>
       </property>
       <widget class="QWidget" name="tasksTab">
        <attribute name="title">
@@ -170,6 +200,19 @@
         <item>
          <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
+           <widget class="QPushButton" name="arrangeButton">
+            <property name="minimumSize">
+             <size>
+              <width>96</width>
+              <height>0</height>
+             </size>
+            </property>
+            <property name="text">
+             <string>&amp;Arrange Files</string>
+            </property>
+           </widget>
+          </item>
+          <item>
            <spacer name="horizontalSpacer">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -184,6 +227,12 @@
           </item>
           <item>
            <widget class="QPushButton" name="refreshButton">
+            <property name="minimumSize">
+             <size>
+              <width>96</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="text">
              <string>&amp;Refresh</string>
             </property>
@@ -191,8 +240,20 @@
           </item>
           <item>
            <widget class="QPushButton" name="judgeSingleTaskButton">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>96</width>
+              <height>0</height>
+             </size>
+            </property>
             <property name="text">
-             <string>Judge Single Task</string>
+             <string>SingleJudge</string>
             </property>
            </widget>
           </item>
@@ -200,6 +261,12 @@
            <widget class="QPushButton" name="judgeButton">
             <property name="enabled">
              <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>96</width>
+              <height>0</height>
+             </size>
             </property>
             <property name="text">
              <string>&amp;Judge</string>
@@ -210,6 +277,12 @@
            <widget class="QPushButton" name="judgeAllButton">
             <property name="enabled">
              <bool>false</bool>
+            </property>
+            <property name="minimumSize">
+             <size>
+              <width>96</width>
+              <height>0</height>
+             </size>
             </property>
             <property name="text">
              <string>Judge &amp;All</string>
@@ -230,7 +303,7 @@
      <x>0</x>
      <y>0</y>
      <width>725</width>
-     <height>26</height>
+     <height>28</height>
     </rect>
    </property>
    <property name="styleSheet">
@@ -265,7 +338,7 @@
     </property>
     <widget class="QMenu" name="languageMenu">
      <property name="title">
-      <string>UI Language</string>
+      <string>&amp;UI Language</string>
      </property>
      <addaction name="setEnglishAction"/>
     </widget>
@@ -276,6 +349,21 @@
     <property name="title">
      <string>&amp;Help</string>
     </property>
+    <widget class="QMenu" name="menuGuides">
+     <property name="title">
+      <string>&amp;Guides</string>
+     </property>
+     <addaction name="actionCompile_Features"/>
+     <addaction name="actionArrange_Files"/>
+     <addaction name="actionBan"/>
+     <addaction name="actionSingle_Judge"/>
+     <addaction name="separator"/>
+     <addaction name="actionSubTasks"/>
+     <addaction name="actionSpecial_Judge"/>
+     <addaction name="actionInteraction"/>
+    </widget>
+    <addaction name="menuGuides"/>
+    <addaction name="separator"/>
     <addaction name="aboutAction"/>
    </widget>
    <addaction name="fileMenu"/>
@@ -331,7 +419,7 @@
   </action>
   <action name="setEnglishAction">
    <property name="text">
-    <string notr="true">English</string>
+    <string notr="true">&amp;English</string>
    </property>
   </action>
   <action name="addTasksAction">
@@ -360,17 +448,52 @@
   </action>
   <action name="judgeSingleTaskAction">
    <property name="text">
-    <string>Judge Single Task</string>
+    <string>Judge &amp;Single Task</string>
    </property>
   </action>
   <action name="openFolderAction">
    <property name="text">
-    <string>Open Current Contest Folder</string>
+    <string>Open Current Contest &amp;Folder</string>
    </property>
   </action>
   <action name="saveAction">
    <property name="text">
-    <string>Save Current Contest</string>
+    <string>&amp;Save Current Contest</string>
+   </property>
+  </action>
+  <action name="actionInteraction">
+   <property name="text">
+    <string>&amp;Interaction</string>
+   </property>
+  </action>
+  <action name="actionSubTasks">
+   <property name="text">
+    <string>&amp;Subtasks</string>
+   </property>
+  </action>
+  <action name="actionArrange_Files">
+   <property name="text">
+    <string>&amp;Arrange Files</string>
+   </property>
+  </action>
+  <action name="actionCompile_Features">
+   <property name="text">
+    <string>&amp;Compile Features</string>
+   </property>
+  </action>
+  <action name="actionBan">
+   <property name="text">
+    <string>&amp;Ban</string>
+   </property>
+  </action>
+  <action name="actionSpecial_Judge">
+   <property name="text">
+    <string>Special Judge</string>
+   </property>
+  </action>
+  <action name="actionSingle_Judge">
+   <property name="text">
+    <string>Single Judge</string>
    </property>
   </action>
  </widget>

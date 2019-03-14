@@ -15,121 +15,124 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
-    <widget class="QTableWidget" name="recentContest">
-     <property name="styleSheet">
-      <string notr="true">font-size: 11pt;</string>
-     </property>
-     <property name="editTriggers">
-      <set>QAbstractItemView::NoEditTriggers</set>
-     </property>
-     <property name="selectionMode">
-      <enum>QAbstractItemView::SingleSelection</enum>
-     </property>
-     <property name="selectionBehavior">
-      <enum>QAbstractItemView::SelectRows</enum>
-     </property>
-     <attribute name="horizontalHeaderHighlightSections">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="horizontalHeaderMinimumSectionSize">
-      <number>80</number>
-     </attribute>
-     <attribute name="horizontalHeaderStretchLastSection">
-      <bool>true</bool>
-     </attribute>
-     <attribute name="verticalHeaderVisible">
-      <bool>false</bool>
-     </attribute>
-     <attribute name="verticalHeaderDefaultSectionSize">
-      <number>25</number>
-     </attribute>
-     <attribute name="verticalHeaderMinimumSectionSize">
-      <number>25</number>
-     </attribute>
-     <column>
-      <property name="text">
-       <string>Title</string>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-     </column>
-     <column>
-      <property name="text">
-       <string>Location</string>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>11</pointsize>
-        <weight>75</weight>
-        <bold>true</bold>
-       </font>
-      </property>
-     </column>
-    </widget>
-   </item>
-   <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_2">
      <item>
-      <spacer name="verticalSpacer">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
+      <widget class="QTableWidget" name="recentContest">
+       <property name="styleSheet">
+        <string notr="true">font-size: 11pt;</string>
        </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
+       <property name="editTriggers">
+        <set>QAbstractItemView::NoEditTriggers</set>
        </property>
-      </spacer>
-     </item>
-     <item>
-      <widget class="QToolButton" name="addButton">
-       <property name="minimumSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
+       <property name="selectionMode">
+        <enum>QAbstractItemView::SingleSelection</enum>
        </property>
-       <property name="icon">
-        <iconset resource="../resource.qrc">
-         <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
+       <property name="selectionBehavior">
+        <enum>QAbstractItemView::SelectRows</enum>
        </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QToolButton" name="deleteButton">
-       <property name="enabled">
+       <attribute name="horizontalHeaderHighlightSections">
         <bool>false</bool>
-       </property>
-       <property name="minimumSize">
-        <size>
-         <width>32</width>
-         <height>32</height>
-        </size>
-       </property>
-       <property name="icon">
-        <iconset resource="../resource.qrc">
-         <normaloff>:/icon/rod.png</normaloff>:/icon/rod.png</iconset>
-       </property>
+       </attribute>
+       <attribute name="horizontalHeaderMinimumSectionSize">
+        <number>80</number>
+       </attribute>
+       <attribute name="horizontalHeaderStretchLastSection">
+        <bool>true</bool>
+       </attribute>
+       <attribute name="verticalHeaderVisible">
+        <bool>false</bool>
+       </attribute>
+       <attribute name="verticalHeaderDefaultSectionSize">
+        <number>25</number>
+       </attribute>
+       <attribute name="verticalHeaderMinimumSectionSize">
+        <number>25</number>
+       </attribute>
+       <column>
+        <property name="text">
+         <string>Title</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+       </column>
+       <column>
+        <property name="text">
+         <string>Location</string>
+        </property>
+        <property name="font">
+         <font>
+          <pointsize>11</pointsize>
+          <weight>75</weight>
+          <bold>true</bold>
+         </font>
+        </property>
+       </column>
       </widget>
      </item>
      <item>
-      <spacer name="verticalSpacer_2">
-       <property name="orientation">
-        <enum>Qt::Vertical</enum>
-       </property>
-       <property name="sizeHint" stdset="0">
-        <size>
-         <width>20</width>
-         <height>40</height>
-        </size>
-       </property>
-      </spacer>
+      <layout class="QHBoxLayout" name="horizontalLayout_3">
+       <item>
+        <spacer name="horizontalSpacer">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item>
+        <widget class="QToolButton" name="addButton">
+         <property name="minimumSize">
+          <size>
+           <width>96</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>&amp;Add</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../resource.qrc">
+           <normaloff>:/icon/add.png</normaloff>:/icon/add.png</iconset>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QToolButton" name="deleteButton">
+         <property name="enabled">
+          <bool>false</bool>
+         </property>
+         <property name="minimumSize">
+          <size>
+           <width>96</width>
+           <height>32</height>
+          </size>
+         </property>
+         <property name="text">
+          <string>&amp;Purge</string>
+         </property>
+         <property name="icon">
+          <iconset resource="../resource.qrc">
+           <normaloff>:/icon/rod.png</normaloff>:/icon/rod.png</iconset>
+         </property>
+         <property name="toolButtonStyle">
+          <enum>Qt::ToolButtonTextBesideIcon</enum>
+         </property>
+        </widget>
+       </item>
+      </layout>
      </item>
     </layout>
    </item>
