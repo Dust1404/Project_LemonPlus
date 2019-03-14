@@ -71,6 +71,8 @@ Lemon::Lemon(QWidget *parent) :
             this, SLOT(summarySelectionChanged()));
     connect(ui->optionsAction, SIGNAL(triggered()),
             this, SLOT(showOptionsDialog()));
+    connect(ui->arrangeButton, SIGNAL(clicked()),
+            this, SLOT(arrangeButtonClicked()));
     connect(ui->refreshButton, SIGNAL(clicked()),
             this, SLOT(refreshButtonClicked()));
     connect(ui->judgeButton, SIGNAL(clicked()),
@@ -103,6 +105,22 @@ Lemon::Lemon(QWidget *parent) :
             this, SLOT(exportResult()));
     connect(ui->aboutAction, SIGNAL(triggered()),
             this, SLOT(aboutLemon()));
+	
+    connect(ui->actionCompile_Features, SIGNAL(triggered()),
+            this, SLOT(actionCompile_Features()));
+    connect(ui->actionArrange_Files, SIGNAL(triggered()),
+            this, SLOT(actionArrange_Files()));
+    connect(ui->actionBan, SIGNAL(triggered()),
+            this, SLOT(actionBan()));
+    connect(ui->actionSingle_Judge, SIGNAL(triggered()),
+            this, SLOT(actionSingle_Judge()));
+    connect(ui->actionSubTasks, SIGNAL(triggered()),
+            this, SLOT(actionSubTasks()));
+    connect(ui->actionSpecial_Judge, SIGNAL(triggered()),
+            this, SLOT(actionSpecial_Judge()));
+    connect(ui->actionInteraction, SIGNAL(triggered()),
+            this, SLOT(actionInteraction()));
+	
     connect(ui->exitAction, SIGNAL(triggered()),
             this, SLOT(close()));
     connect(ui->summary, SIGNAL(taskChanged()),
@@ -288,6 +306,16 @@ void Lemon::refreshButtonClicked()
         ui->judgeSingleTaskAction->setEnabled(false);
     }
 }
+
+
+void Lemon::arrangeButtonClicked()
+{
+	QFile::copy(":/tools/shin.sh",Settings::sourcePath()+"shin.sh");
+	QFile::copy(":/tools/shout.sh",Settings::sourcePath()+"shout.sh");
+	QProcess::execute("bash "+Settings::sourcePath()+"shin.sh");
+	QProcess::execute("bash "+Settings::sourcePath()+"shout.sh");
+}
+
 
 void Lemon::tabIndexChanged(int index)
 {
@@ -558,8 +586,8 @@ void Lemon::addTask(const QString &title, const QList<QPair<QString, QString> > 
 
 bool Lemon::compareFileName(const QPair<QString, QString> &a, const QPair<QString, QString> &b)
 {
-    return a.first.length() < b.first.length()
-            || a.first.length() == b.first.length() && QString::localeAwareCompare(a.first, b.first) < 0;
+    return (a.first.length() < b.first.length())
+		|| (a.first.length() == b.first.length() && QString::localeAwareCompare(a.first, b.first) < 0);
 }
 
 void Lemon::addTasksAction()
@@ -637,7 +665,7 @@ void Lemon::exportResult()
 void Lemon::aboutLemon()
 {
     QString text;
-    text += "<h2>Project LemonPlus</h2>";
+    text += "<h2>Project LemonPt</h2>";
     text += tr("A tiny judging environment for OI contest based on Project Lemon") + "<br>";
     text += tr("Based on Project Lemon version 1.2 Beta by Zhipeng Jia, 2011") + "<br>";
     text += tr("Build Date: %1").arg(__DATE__) + "<br>";
@@ -645,8 +673,81 @@ void Lemon::aboutLemon()
     text += tr("This program is under the <a href=\"http://www.gnu.org/licenses/gpl-3.0.html\">GPLv3</a> license")
             + "<br>";
     text += tr("Update by Dust1404") + "</a><br>";
-    text += QString("<a href=\"https://github.com/Dust1404/Project_LemonPlus\">") + tr("Github Page") + "</a>";
-    QMessageBox::about(this, tr("About LemonPlus"), text);
+    text += tr("Featured by iotang") + "</a><br>";
+    QMessageBox::about(this, tr("About LemonPt"), text);
+}
+
+void Lemon::actionCompile_Features()
+{
+    QString text;
+    text += "<h3>" + tr("Compile Features") + "</h3>";
+    text += tr("We have made stack space equals to memory limit. If the memory limit is unlimited, stack space will be 2.00 GB.") + "<br>";
+    QMessageBox::about(this, tr("About Compile Features"), text);
+}
+
+void Lemon::actionInteraction()
+{
+    QString text;
+    text += "<h3>" + tr("Interaction") + "</h3>";
+    text += tr("There is a example of how to use Interaction type tasks.") + "<br>";
+    text += tr("Interactor Path martix/martix.h") + "<br>";
+    text += tr("Interactor Name martix.h") + "<br>";
+    text += tr("Grader Path martix/grader.cpp") + "<br>";
+    QMessageBox::about(this, tr("About Interaction"), text);
+}
+
+void Lemon::actionSubTasks()
+{
+    QString text;
+    text += "<h3>" + tr("How to make Subtasks") + "</h3>";
+    text += tr("Regular Expression:") + "<br>";
+    text += tr("Numbers : \\d*") + "<br>";
+    text += tr("<a href=\"http://www.runoob.com/java/java-regular-expressions.html\">More Regular Expression Rules</a>") + "<br>";
+    QMessageBox::about(this, tr("About Subtasks"), text);
+}
+
+void Lemon::actionArrange_Files()
+{
+    QString text;
+    text += "<h3>" + tr("What is Arrange Files") + "</h3>";
+    text += tr("Be Careful : May Cause SEVERE FILE DAMAGES.") + "<br>";
+    QMessageBox::about(this, tr("About Arrange Files"), text);
+}
+
+void Lemon::actionBan()
+{
+    QString text;
+    text += "<h3>" + tr("What is Ban") + "</h3>";
+    text += tr("It can stop a judging task.") + "<br>";
+    QMessageBox::about(this, tr("About Ban"), text);
+}
+
+void Lemon::actionSingle_Judge()
+{
+    QString text;
+    text += "<h3>" + tr("What is Single Judge") + "</h3>";
+    text += tr("It can judge one task instead of all.") + "<br>";
+    QMessageBox::about(this, tr("About Single Judge"), text);
+}
+
+void Lemon::actionSpecial_Judge()
+{
+    QString text;
+    text += "<h3>" + tr("What is Special Judge") + "</h3>";
+    text += tr("Just see this sample.") + "<br>";
+	text += "ifstream fin,fout,fstd,fper;<br>";
+	text += "ofstream fsco,fre;<br>";
+	text += "int main(int ag,char *ar[])<br>";
+	text += "{<br>";
+	text += "	fin.open(ar[1]),fout.open(ar[2]),fstd.open(ar[3]),fper.open(ar[4]),fsco.open(ar[5]),fre.open(ar[6]);<br>";
+	text += "	int scr;double a,b,x;scr=atoi(ar[4]);fout>>a,fstd>>b;<br>";
+	text += "	x=fabs(a-b)*100;x=x/(b+1e-7);<br>";
+	text += "	if(x&gt;1.00)scr*=0.0,fsco&lt;&lt;scr,fre&lt;&lt;\"The diff has reached \"&lt;&lt;setprecision(2)&lt;&lt;fixed&lt;&lt;x&lt;&lt;\"%. Ni fan che la!\";<br>";
+	text += "	else scr*=1.0,fsco&lt;&lt;scr,fre&lt;&lt;\"The diff is \"&lt;&lt;setprecision(2)&lt;&lt;fixed&lt;&lt;x&lt;&lt;\"%. Deja vu!\";<br>";
+	text += "	fin.close(),fout.close(),fstd.close(),fper.close(),fsco.close(),fre.close();<br>";
+	text += "	return 0;<br>";
+	text += "}<br>";
+    QMessageBox::about(this, tr("About Special Judge"), text);
 }
 
 void Lemon::setUiLanguage()

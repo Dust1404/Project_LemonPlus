@@ -72,6 +72,7 @@ private slots:
     void resetDataWatcher();
     void showOptionsDialog();
     void refreshButtonClicked();
+    void arrangeButtonClicked();
     void tabIndexChanged(int);
     void viewerSelectionChanged();
     void contestantDeleted();
@@ -83,6 +84,13 @@ private slots:
     void addTasksAction();
     void exportResult();
     void aboutLemon();
+    void actionCompile_Features();
+    void actionInteraction();
+    void actionSubTasks();
+    void actionArrange_Files();
+    void actionBan();
+    void actionSingle_Judge();
+    void actionSpecial_Judge();
     void setUiLanguage();
     void refreshTaskList();
 

@@ -116,7 +116,9 @@ const QList<QStringList>& AssignmentThread::getInputFiles() const
 bool AssignmentThread::traditionalTaskPrepare()
 {
     compileState = NoValidSourceFile;
-    QDir contestantDir = ! task->getSubFolderCheck() ? QDir(Settings::sourcePath() + contestantName) : QDir(Settings::sourcePath() + contestantName + QDir::separator() + task->getSourceFileName());
+    QDir contestantDir;
+	contestantDir = ! task->getSubFolderCheck() ? QDir(Settings::sourcePath() + contestantName) : QDir(Settings::sourcePath() + contestantName + QDir::separator() + task->getSourceFileName());
+
     QList<Compiler*> compilerList = settings->getCompilerList();
     
     for (int i = 0; i < compilerList.size(); i ++) {
@@ -260,6 +262,7 @@ bool AssignmentThread::traditionalTaskPrepare()
     return true;
 }
 
+int ST_B;
 void AssignmentThread::run()
 {
     if (task->getTaskType() != Task::AnswersOnly)
@@ -285,6 +288,9 @@ void AssignmentThread::run()
         }
     }
 
+
+	ST_B=0;
+	
     assign();
 
     exec();

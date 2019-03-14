@@ -34,6 +34,8 @@ JudgingDialog::JudgingDialog(QWidget *parent) :
     cursor = new QTextCursor(ui->logViewer->document());
     connect(ui->cancelButton, SIGNAL(clicked()),
             this, SLOT(stopJudgingSlot()));
+	connect(ui->banButton, SIGNAL(clicked()),
+            this, SLOT(banJudging()));
 }
 
 JudgingDialog::~JudgingDialog()
@@ -111,53 +113,62 @@ void JudgingDialog::singleCaseFinished(int progress, int x, int y, int result)
             text = tr("Correct answer");
             charFormat.setForeground(QBrush(Qt::darkGreen));
             break;
+        case PartlyCorrect:
+            text = tr("Partly correct");
+            charFormat.setForeground(QBrush(Qt::darkCyan));
+            break;
         case WrongAnswer:
             text = tr("Wrong answer");
             charFormat.setForeground(QBrush(Qt::red));
             break;
-        case PartlyCorrect:
-            text = tr("Partly correct");
-            charFormat.setForeground(QBrush(Qt::darkYellow));
-            break;
         case TimeLimitExceeded:
             text = tr("Time limit exceeded");
-            charFormat.setForeground(QBrush(Qt::red));
+            charFormat.setForeground(QBrush(Qt::darkYellow));
             break;
         case MemoryLimitExceeded:
             text = tr("Memory limit exceeded");
-            charFormat.setForeground(QBrush(Qt::red));
-            break;
-        case CannotStartProgram:
-            text = tr("Cannot start program");
-            charFormat.setForeground(QBrush(Qt::red));
-            break;
-        case FileError:
-            text = tr("File error");
-            charFormat.setForeground(QBrush(Qt::red));
+            charFormat.setForeground(QBrush(Qt::darkBlue));
             break;
         case RunTimeError:
             text = tr("Run time error");
-            charFormat.setForeground(QBrush(Qt::red));
+            charFormat.setForeground(QBrush(Qt::darkMagenta));
             break;
-        case InvalidSpecialJudge:
-            text = tr("Invalid special judge");
-            charFormat.setForeground(QBrush(Qt::darkBlue));
-            break;
-        case SpecialJudgeTimeLimitExceeded:
-            text = tr("Special judge time limit exceeded");
-            charFormat.setForeground(QBrush(Qt::darkBlue));
-            break;
-        case SpecialJudgeRunTimeError:
-            text = tr("Special judge run time error");
-            charFormat.setForeground(QBrush(Qt::darkBlue));
-            break;
+			
         case Skipped:
             text = tr("Skipped");
-            charFormat.setForeground(QBrush(Qt::darkCyan));
+            charFormat.setForeground(QBrush(Qt::lightGray));
+            break;
+			
+        case CannotStartProgram:
+            text = tr("Cannot start program");
+            charFormat.setForeground(QBrush(Qt::darkRed));
+			charFormat.setForeground(QBrush(Qt::lightGray));
+            break;
+        case FileError:
+            text = tr("File error");
+            charFormat.setForeground(QBrush(Qt::darkYellow));
+			charFormat.setForeground(QBrush(Qt::lightGray));
             break;
         case InteractorError:
             text = tr("Interactor error");
-            charFormat.setForeground(QBrush(Qt::darkBlue));
+            charFormat.setForeground(QBrush(Qt::darkCyan));
+			charFormat.setBackground(QBrush(Qt::lightGray));
+            break;
+        case InvalidSpecialJudge:
+            text = tr("Invalid special judge");
+            charFormat.setForeground(QBrush(Qt::red));
+			charFormat.setBackground(QBrush(Qt::lightGray));
+            break;
+			
+        case SpecialJudgeTimeLimitExceeded:
+            text = tr("Special judge time limit exceeded");
+            charFormat.setForeground(QBrush(Qt::yellow));
+			charFormat.setBackground(QBrush(Qt::darkGray));
+            break;
+        case SpecialJudgeRunTimeError:
+            text = tr("Special judge run time error");
+            charFormat.setForeground(QBrush(Qt::magenta));
+			charFormat.setBackground(QBrush(Qt::darkGray));
             break;
     }
     
@@ -183,10 +194,16 @@ void JudgingDialog::singleSubtaskDependenceFinished(int x, int y, double ratio)
     if(percentage == 10000)
         charFormat.setForeground(QBrush(Qt::darkGreen));
     else if(percentage == 0)
+	{
         charFormat.setForeground(QBrush(Qt::red));
-    else
+		charFormat.setFontWeight(QFont::Bold);
+    }
+	else
+	{
         charFormat.setForeground(QBrush(Qt::darkYellow));
-
+		charFormat.setFontWeight(QFont::Bold);
+	}
+	
     cursor->insertText(text, charFormat);
 
     QScrollBar *bar = ui->logViewer->verticalScrollBar();
@@ -236,19 +253,27 @@ void JudgingDialog::compileError(int progress, int compileState)
     switch (CompileState(compileState)) {
         case NoValidSourceFile:
             text = tr("Cannot find valid source file");
-            charFormat.setForeground(QBrush(Qt::red));
+            charFormat.setForeground(QBrush(Qt::black));
+            charFormat.setBackground(QBrush(Qt::red));
             break;
         case CompileError:
             text = tr("Compile error");
-            charFormat.setForeground(QBrush(Qt::red));
+            charFormat.setForeground(QBrush(Qt::black));
+            charFormat.setBackground(QBrush(Qt::yellow));
             break;
         case CompileTimeLimitExceeded:
             text = tr("Compile time limit exceeded");
-            charFormat.setForeground(QBrush(Qt::red));
+            charFormat.setForeground(QBrush(Qt::black));
+            charFormat.setBackground(QBrush(Qt::darkYellow));
             break;
         case InvalidCompiler:
             text = tr("Invalid compiler");
-            charFormat.setForeground(QBrush(Qt::blue));
+            charFormat.setForeground(QBrush(Qt::black));
+            charFormat.setBackground(QBrush(Qt::lightGray));
+			break;
+		case CompileSuccessfully:
+            text = tr("Compile Successfully");
+            charFormat.setForeground(QBrush(Qt::lightGray));
             break;
     }
     
@@ -263,6 +288,12 @@ void JudgingDialog::stopJudgingSlot()
 {
     stopJudging = true;
     emit stopJudgingSignal();
+}
+
+extern int ST_B;
+void JudgingDialog::banJudging()
+{
+	ST_B=1;
 }
 
 void JudgingDialog::reject()

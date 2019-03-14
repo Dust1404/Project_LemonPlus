@@ -50,6 +50,7 @@ public:
 
 private slots:
     void stopJudgingSlot();
+	void banJudging();
 
 private:
     Ui::JudgingDialog *ui;

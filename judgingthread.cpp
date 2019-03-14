@@ -638,11 +638,20 @@ void JudgingThread::specialJudge(const QString &fileName)
     messageFile.remove();
 }
 
+extern int ST_B;
+
 void JudgingThread::runProgram()
 {
     result = CorrectAnswer;
     int extraTime = qCeil(qMax(2000, timeLimit * 2) * extraTimeRatio);
-    
+
+	if(ST_B)
+	{
+		result = TimeLimitExceeded;
+		score = 0;
+		return;
+	}
+	
 #ifdef Q_OS_WIN32
     SetErrorMode(SEM_NOGPFAULTERRORBOX);
     
