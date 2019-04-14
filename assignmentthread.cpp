@@ -154,15 +154,20 @@ bool AssignmentThread::traditionalTaskPrepare()
                     memoryLimitRatio = compilerList[i]->getMemoryLimitRatio();
                     disableMemoryLimitCheck = compilerList[i]->getDisableMemoryLimitCheck();
                     environment = compilerList[i]->getEnvironment();
-                    QStringList values = environment.toStringList();
+                    QStringList values = QProcessEnvironment::systemEnvironment().toStringList();
+                    //qDebug() << values;
+                    //qDebug() << environment.toStringList();
                     for (int k = 0; k < values.size(); k ++) {
                         int tmp = values[k].indexOf("=");
                         QString variable = values[k].mid(0, tmp);
-                        environment.insert(variable, 
-                                           environment.value(variable) + ";"
-                                           + QProcessEnvironment::systemEnvironment().value(variable));
+                        if (environment.contains(variable))
+                            environment.insert(variable,
+                                               environment.value(variable) + ";"
+                                               + QProcessEnvironment::systemEnvironment().value(variable));
+                        else
+                            environment.insert(variable, QProcessEnvironment::systemEnvironment().value(variable));
                     }
-                    
+                    //qDebug() << environment.toStringList();
                     if (compilerList[i]->getCompilerType() == Compiler::Typical) {
 #ifdef Q_OS_WIN32
                                 executableFile = task->getSourceFileName() + ".exe";
