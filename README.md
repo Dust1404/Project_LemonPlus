@@ -45,7 +45,7 @@ Based on Lemon, More than Lemon.
 
 # 安装方法
 ## Windows
-下载 windows_release.7z，解压后直接运行即可。
+下载 [windows_release.7z](https://raw.githubusercontent.com/Dust1404/Project_LemonPlus/master/Release/windows_release.7z)，解压后直接运行即可。
 ## Linux
 
 先安装依赖环境（必要的）：
