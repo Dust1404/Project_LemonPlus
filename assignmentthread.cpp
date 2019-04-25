@@ -159,6 +159,8 @@ bool AssignmentThread::traditionalTaskPrepare()
                     //qDebug() << environment.toStringList();
                     for (int k = 0; k < values.size(); k ++) {
                         int tmp = values[k].indexOf("=");
+                        if (tmp == 0)
+                            continue;
                         QString variable = values[k].mid(0, tmp);
                         if (environment.contains(variable))
                             environment.insert(variable,
