@@ -3,7 +3,7 @@ A tiny judging environment for OI contest based on Project_Lemon.
 
 Based on Lemon, More than Lemon.
 
-
+用户手册已经上传，有更详细的使用功能介绍，见 `User Manual` 文件夹。
 
 在以下系统上做过测试，可以正常运行：
 
