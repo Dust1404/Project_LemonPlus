@@ -14,7 +14,7 @@ Based on Lemon, More than Lemon.
 - NOI LINUX (Ubuntu 14.04.2 LTS i386)
 - Ubuntu MATE 18.04.1 LTS i386
 
-有问题请联系作者 QQ：2477259579。
+作者已经 AFO，有问题可以在 `issue` 提出，也欢迎各位通过 `pull request` 参与本项目的维护。
 
 # 新增
 
@@ -51,7 +51,7 @@ Based on Lemon, More than Lemon.
 先安装依赖环境（必要的）：
 
 ```bash
-sudo apt-get install g++ gcc qt5-default make
+sudo apt install g++ gcc qt5-default make
 ```
 
 下载源代码，在源代码目录中依次执行：
@@ -79,3 +79,5 @@ make
 构建 lemon 项目。
 
 随后使用 `./lemon` 即可运行（某些版本也可以双击运行）。
+
+编译后可以将 `lemon` 单独拷贝至某个目录运行，其余文件都可以删除。

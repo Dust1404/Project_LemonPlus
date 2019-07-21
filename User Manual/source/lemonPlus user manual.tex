@@ -118,6 +118,8 @@ make
 
 这时目录下已经编译出了可执行文件，使用 \texttt{./lemon} 就可以运行 lemonPlus。
 
+编译得到的 \texttt{lemon} 可以单独拷贝至任意目录运行，其余文件可以删除。
+
 \newpage
 
 \section{配置}
@@ -476,5 +478,8 @@ ulimit -s unlimited
 
 \subsection{Linux 下无法运行程序，临时目录下出现乱码}
 这是安装时没有在本机编译 \texttt{watcher\_unix.c} 造成的，建议按照 \hyperref[linux install]{安装方法} 重新安装。
+
+\subsection{Linux 下编译完成移动 lemon 是否应将 realjudge 和 watcher 同时复制}
+不需要，编译完成后 \texttt{lemon} 可以单独运行，其余文件均可删除。
 
 \end{document}
