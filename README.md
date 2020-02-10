@@ -3,6 +3,8 @@ A tiny judging environment for OI contest based on Project_Lemon.
 
 Based on Lemon, More than Lemon.
 
+**由于作者 AFO，本项目已经停止维护，请使用 [LemonLime](https://github.com/iotang/Project_LemonLime) 以获得更好的体验和技术支持。**
+
 用户手册已经上传，有更详细的使用功能介绍，见 `User Manual` 文件夹。
 
 在以下系统上做过测试，可以正常运行：
@@ -13,8 +15,6 @@ Based on Lemon, More than Lemon.
 - Ubuntu MATE 18.04.1 LTS amd64
 - NOI LINUX (Ubuntu 14.04.2 LTS i386)
 - Ubuntu MATE 18.04.1 LTS i386
-
-作者已经 AFO，有问题可以在 `issue` 提出，也欢迎各位通过 `pull request` 参与本项目的维护。
 
 # 新增
 
